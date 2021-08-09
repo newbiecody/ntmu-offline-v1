@@ -21,3 +21,15 @@ MaterialColor createMaterialColor(Color color) {
   });
   return MaterialColor(color.value, swatch);
 }
+
+void authenticateUser(){
+  //authenticateUser code here
+}
+
+void createAccount(){
+  //create account code here
+}
+
+void forgotPassword(){
+  //forgot password code here
+}
