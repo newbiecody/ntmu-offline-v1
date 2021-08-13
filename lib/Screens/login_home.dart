@@ -7,136 +7,141 @@ class loginScreen extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       body: Center(
-
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 190, 0, 120),
-              child: Text(
-                'Welcome to NTmU',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0XFF495057),
-                  fontSize: 28,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:
+              <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 100, 0, 120),
+                child: Text(
+                  'Welcome to NTmU',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0XFF495057),
+                    fontSize: 28,
+                  ),
                 ),
               ),
-            ),
-            Column(
-              children: <Widget>[
+              Column(
+                children: <Widget>[
 
-                Row(
-                  children: [
-                    SizedBox(width: 100),
-                    Text(
-                      'Username',
-                      //textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Color(0XFF495057),
-                        fontSize: 12
-                      )
-                    ),
-                  ],
-                ),
-                Container(
-                  //margin: EdgeInsets.all(0),
-                  padding: EdgeInsets.symmetric(horizontal: 100),
-                  child: TextField(
-                    maxLength: 25,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                      counterText: ''
+                  Row(
+                    children: [
+                      SizedBox(width: 100),
+                      Text(
+                        'Username',
+                        //textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Color(0XFF495057),
+                          fontSize: 12
+                        )
+                      ),
+                    ],
+                  ),
+                  Container(
+                    //margin: EdgeInsets.all(0),
+                    padding: EdgeInsets.symmetric(horizontal: 100),
+                    child: TextField(
+                      maxLength: 25,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                        counterText: ''
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    SizedBox(width: 100),
-                    Text(
-                      'Password',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Color(0XFF495057),
-                        fontSize: 12
-                      )
-                    ),
-                  ],
-                ),
-                Container(
-                  //margin: EdgeInsets.all()
-                  padding: EdgeInsets.symmetric(horizontal: 100),
-                  child: TextField(
-                    maxLength: 50,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                      counterText: ''),
-                  )
-                ),
-                SizedBox(height: 10),
-                Text.rich(
-                  TextSpan(
-                    text: 'Forgot password?',
-                    recognizer: new TapGestureRecognizer()..onTap = (){
-                      forgotPassword();
-                    },
-                    style: TextStyle(
-                      fontSize: 12,
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      SizedBox(width: 100),
+                      Text(
+                        'Password',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Color(0XFF495057),
+                          fontSize: 12
+                        )
+                      ),
+                    ],
+                  ),
+                  Container(
+                    //margin: EdgeInsets.all()
+                    padding: EdgeInsets.symmetric(horizontal: 100),
+                    child: TextField(
+                      maxLength: 50,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                        counterText: ''),
                     )
-                  )
-                ),
-                SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: (){
-                    authenticateUser();
-                  },
-                  child: Text('Sign in'),
-                  style:
-                    ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                      minimumSize: Size(170,35)),
-                ),
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(90,30,0,10),
-                        child: Divider(
-                          color: Color(0XFF495057)
-                        ),
+                  ),
+                  SizedBox(height: 10),
+                  Text.rich(
+                    TextSpan(
+                      text: 'Forgot password?',
+                      recognizer: new TapGestureRecognizer()..onTap = (){
+                        forgotPassword();
+                      },
+                      style: TextStyle(
+                        fontSize: 12,
                       )
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(10,30,10,10),
-                      child: Text('or'),
-                    ),
-                    Expanded(
+                    )
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: (){
+                      authenticateUser();
+
+                    },
+                    child: Text('Sign in'),
+                    style:
+                      ElevatedButton.styleFrom(
+                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                        minimumSize: Size(170,35)),
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0,30,90,10),
+                          padding: const EdgeInsets.fromLTRB(90,10,0,10),
                           child: Divider(
-                              color: Color(0XFF212529)
+                            color: Color(0XFF495057)
                           ),
                         )
-                    ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10,10,10,10),
+                        child: Text('or'),
+                      ),
+                      Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,10,90,10),
+                            child: Divider(
+                                color: Color(0XFF212529)
+                            ),
+                          )
+                      ),
 
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: ElevatedButton(
-                      onPressed: (){
-                        createAccount();
-                      },
-                      child: Text('New here? Create an account'),
-                      style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35))
-
-                      )
+                    ],
                   ),
-                )
-              ]
-            ),
-          ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20,0,20,0),
+                    child: ElevatedButton(
+                        onPressed: (){
+                          createAccount(context);
+                        },
+                        child: Text('New here? Create an account'),
+                        style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35))
 
+                        )
+                    ),
+                  )
+                ]
+              ),
+            ],
+
+          ),
         )
       )
     );
