@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Screens/PostLogin/userMatchRecommendation.dart';
+import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
 import '../Screens/login_home.dart';
 import 'functs.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: <String, WidgetBuilder>{
         '/loginScreen': (BuildContext context) => new loginScreen(),
-        '/userRecommendationPage': (BuildContext context) => new userMatchRecommendation(),
+        '/userRecommendationPage': (BuildContext context) => new baseScreen_postLogin(),
       },
       title: 'Nice To meet You',
       theme: ThemeData(

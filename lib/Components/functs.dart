@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_password.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_name.dart';
@@ -8,6 +8,13 @@ import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
+
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/profile.dart';
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/settings.dart';
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/preferences.dart';
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/feedback.dart';
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editProfile.dart';
+
 
 MaterialColor CreateMaterialColor(Color color) {
   List strengths = <double>[.05];
@@ -92,5 +99,28 @@ void RegisterNewAccountInformation(BuildContext context){
 
 void userRecommendationPage(BuildContext context){
   Navigator.of(context).pushNamedAndRemoveUntil('/userRecommendationPage', (Route<dynamic> route) => false);
+}
 
+void drawerProfile(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage())));
+}
+
+void settingsProfile(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage())));
+}
+
+void preferencesProfile(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(preferencePage())));
+}
+
+void feedbackProfile(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(feedbackPage())));
+}
+
+void editProfile(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage())));
+}
+
+void saveProfileEdits(){
+  //Edit information in the database, update information viewer sees.
 }
