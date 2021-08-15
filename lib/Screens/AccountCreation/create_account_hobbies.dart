@@ -15,7 +15,7 @@ class create_account_hobbies extends StatelessWidget{
                 SelectHobbyWidget(),
                 ElevatedButton(
                     onPressed: (){
-                      RegisterNewAccountInformation(context);
+                      accountCreationConfirmation(context);
                     },
                     child: Text(
                         'Next'

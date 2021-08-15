@@ -7,6 +7,7 @@ import 'package:ntmu/Screens/AccountCreation/create_account_birthday.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
+import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
 
 MaterialColor CreateMaterialColor(Color color) {
   List strengths = <double>[.05];
@@ -70,6 +71,10 @@ void addHobbies(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_hobbies())));
 }
 
+void accountCreationConfirmation(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_confirmation())));
+}
+
 void forgotPassword(){
   //forget password options
 }
@@ -81,7 +86,11 @@ void uploadPhoto(){
 void RegisterNewAccountInformation(BuildContext context){
   //send information to database, validate information and register user. Login into the main page(match with users).
 
-
-
+  userRecommendationPage(context);
   //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(())));
+}
+
+void userRecommendationPage(BuildContext context){
+  Navigator.of(context).pushNamedAndRemoveUntil('/userRecommendationPage', (Route<dynamic> route) => false);
+
 }

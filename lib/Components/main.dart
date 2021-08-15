@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:ntmu/Screens/PostLogin/userMatchRecommendation.dart';
 import '../Screens/login_home.dart';
 import 'functs.dart';
 
-
 void main() {
-  String data = 'error';
-  print(data);
   runApp(MyApp());
 }
 
@@ -15,6 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: <String, WidgetBuilder>{
+        '/loginScreen': (BuildContext context) => new loginScreen(),
+        '/userRecommendationPage': (BuildContext context) => new userMatchRecommendation(),
+      },
       title: 'Nice To meet You',
       theme: ThemeData(
         fontFamily: 'Balsamiq Sans',
