@@ -124,3 +124,7 @@ void editProfile(BuildContext context){
 void saveProfileEdits(){
   //Edit information in the database, update information viewer sees.
 }
+
+void confirmEditPassword(){
+  //Check current password, check if new and re-entered password is the same, then edit the password. (add logout of all devices?)
+}
