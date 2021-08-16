@@ -22,9 +22,16 @@ class _preferencePageState extends State<preferencePage> {
           );
         }
         ),
-        title: Text('Preferences'),
+        title: Text('Preferences for matches'),
         centerTitle: true,
       ),
+      body: Center(
+        child: Column(
+          children: <Widget> [
+
+          ],
+        ),
+      )
     );
   }
 }

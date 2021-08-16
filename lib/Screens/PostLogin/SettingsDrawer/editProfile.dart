@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 
@@ -46,21 +47,25 @@ class _editProfilePageState extends State<editProfilePage> {
                       color: Color(0X8099DDC8)
                   ),
                   height: 40,
-                  child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Name',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Name',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
@@ -80,21 +85,25 @@ class _editProfilePageState extends State<editProfilePage> {
                       color: Color(0X8099DDC8)
                   ),
                   height: 40,
-                  child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Age',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Age',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
@@ -114,21 +123,25 @@ class _editProfilePageState extends State<editProfilePage> {
                       color: Color(0X8099DDC8)
                   ),
                   height: 32,
-                  child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Gender',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Gender',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
@@ -148,21 +161,25 @@ class _editProfilePageState extends State<editProfilePage> {
                       color: Color(0X8099DDC8)
                   ),
                   height: 40,
-                  child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Religion',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Religion',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
@@ -181,21 +198,25 @@ class _editProfilePageState extends State<editProfilePage> {
                   decoration: BoxDecoration(
                       color: Color(0X8099DDC8)
                   ),
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Interests',
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Interests',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
@@ -214,20 +235,24 @@ class _editProfilePageState extends State<editProfilePage> {
                   decoration: BoxDecoration(
                       color: Color(0X8099DDC8)
                   ),
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Align(
-                          child: Text('Self-summary',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold
+                  child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Align(
+                            child: Text('Self-summary',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold
+                              ),
                             ),
+                            alignment: Alignment.centerLeft,
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
+                    ]
                   )
               ),
               Padding(
