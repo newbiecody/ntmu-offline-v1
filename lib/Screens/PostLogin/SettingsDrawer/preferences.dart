@@ -22,16 +22,209 @@ class _preferencePageState extends State<preferencePage> {
           );
         }
         ),
-        title: Text('Preferences for matches'),
+        title: Text('Preferences'),
         centerTitle: true,
       ),
       body: Center(
         child: Column(
           children: <Widget> [
-
+            SizedBox(height: 20),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: Color(0X8099DDC8),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 32,
+                child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                              child: Text('Gender',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                            Align(
+                              child: Text('None',
+                                  style: TextStyle(
+                                      color: Color(0X80000000)
+                                  )
+                              ),
+                              alignment: Alignment.centerRight,
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                )
+            ),
+            SizedBox(height: 20),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: Color(0X8099DDC8),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 32,
+                child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                              child: Text('Country of Origin',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                            Align(
+                              child: Text('Singapore',
+                                  style: TextStyle(
+                                      color: Color(0X80000000)
+                                  )
+                              ),
+                              alignment: Alignment.centerRight,
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                )
+            ),
+            SizedBox(height: 20),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: Color(0X8099DDC8),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 32,
+                child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                              child: Text('Course of Study',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                            Align(
+                              child: Text('None',
+                                  style: TextStyle(
+                                      color: Color(0X80000000)
+                                  )
+                              ),
+                              alignment: Alignment.centerRight,
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                )
+            ),
+            SizedBox(height: 20),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: Color(0X8099DDC8),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: 32,
+                child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Align(
+                              child: Text('Religion',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                            Align(
+                              child: Text('None',
+                                  style: TextStyle(
+                                      color: Color(0X80000000)
+                                  )
+                              ),
+                              alignment: Alignment.centerRight,
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                )
+            ),
+            SizedBox(height: 20),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                decoration: BoxDecoration(
+                    color: Color(0X8099DDC8),
+                    borderRadius: BorderRadius.all(Radius.circular(10))
+                ),
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Flex(
+                    direction: Axis.horizontal,
+                    children: <Widget> [
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Align(
+                              child: Text('Interests',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                            Align(
+                              child: Text('None',
+                                  style: TextStyle(
+                                      color: Color(0X80000000)
+                                  )
+                              ),
+                              alignment: Alignment.centerLeft,
+                            ),
+                          ],
+                        ),
+                      )
+                    ]
+                )
+            ),
           ],
         ),
-      )
+      ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              editPreferences(context);
+            },
+            child: Icon(Icons.edit)
+        )
     );
   }
 }

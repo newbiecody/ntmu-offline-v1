@@ -8,6 +8,7 @@ import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
+import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editPreferences.dart';
 
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/profile.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/settings.dart';
@@ -121,10 +122,20 @@ void editProfile(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage())));
 }
 
+void editPreferences(BuildContext context){
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) => (editPreferencePage())));
+}
+
 void saveProfileEdits(){
   //Edit information in the database, update information viewer sees.
 }
 
-void confirmEditPassword(){
-  //Check current password, check if new and re-entered password is the same, then edit the password. (add logout of all devices?)
+void checkPassword(String password){
+  //if
+}
+
+bool confirmEditPassword(){
+  //Check current password, check if new and re-entered password is the same, then edit the password in database, then show success popup
+  //else show failure popup and remove bring user back to settings page
+  return true;
 }

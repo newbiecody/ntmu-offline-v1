@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 
 class settingsPage extends StatefulWidget{
+
   const settingsPage({Key? key}) : super(key:key);
 
   @override
@@ -11,6 +14,9 @@ class settingsPage extends StatefulWidget{
 class _settingsPageState extends State<settingsPage> {
 
   final _changePasswordForm = GlobalKey<FormState>();
+  final currentPasswordController = TextEditingController();
+  final newPasswordController1 = TextEditingController();
+  final newPasswordController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +70,7 @@ class _settingsPageState extends State<settingsPage> {
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         child: TextFormField(
+                        controller: currentPasswordController,
                         decoration: InputDecoration.collapsed(
                           //border: InputBorder.none,
                           hintText: 'Enter current password',
@@ -74,30 +81,41 @@ class _settingsPageState extends State<settingsPage> {
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.always,
+                          validator: (value){
+                            (value!.isEmpty || value == null)? 'Please enter a new password.' : null;
+                          },
+                          controller: newPasswordController1,
                           decoration: InputDecoration.collapsed(
                             //border: InputBorder.none,
                             hintText: 'Enter new password',
                           ),
-                          validator: (value){
-                            //insert logic to lock change password button below
-                          },
                         )
                     ),
                     Divider(color: Color(0X80000000)),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         child: TextFormField(
+                          autovalidateMode: AutovalidateMode.always,
+                          validator: (value){
+                            if (newPasswordController1.text != value){
+                              return 'Your new passwords don\'t match. Please try again...';
+                            }
+                            (value!.isEmpty || value == null)? 'Please confirm your new password.' : null;
+                          },
+                          controller: newPasswordController2,
                           decoration: InputDecoration.collapsed(
                             border: InputBorder.none,
                             hintText: 'Confirm new password',
                           ),
-                          validator: (value){
-                            //insert logic to lock change password button below
-                          },
                         )
                     ),
+                    SizedBox(height: 15),
                     ElevatedButton(
-                      onPressed: () {confirmEditPassword();},
+                      onPressed: (){
+                        //code here
+                      }
+                      ,
                       child: Text('Confirm password change'),
                       style: ElevatedButton.styleFrom(
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
