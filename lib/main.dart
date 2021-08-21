@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
-import '../Screens/login_home.dart';
-import 'functs.dart';
+import 'Screens/login_home.dart';
+import 'Components/functs.dart';
+// @dart=2.9
 
 void main() {
   runApp(MyApp());

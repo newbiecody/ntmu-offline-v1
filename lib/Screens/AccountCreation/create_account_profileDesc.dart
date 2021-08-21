@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
 
 class create_account_profileDesc extends StatelessWidget{
+
+  final description = new TextEditingController();
+  dataPacket creationData;
+  create_account_profileDesc({Key? key, required this.creationData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,11 +17,11 @@ class create_account_profileDesc extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height:80),
                   GestureDetector(
                     onTap: ()=> uploadPhoto(),
                     child: CircleAvatar(
-                      minRadius: 120,
-                      maxRadius: 120,
+                      radius: 150,
                       backgroundColor: Color(0X3399DDC8),
                       child: Icon(
                         Icons.add_a_photo_rounded,
@@ -35,7 +41,17 @@ class create_account_profileDesc extends StatelessWidget{
                         ),
                         Container(
                           height: 300,
-                          child: TextField(
+                          child: TextFormField(
+                            controller: description,
+                            autovalidateMode: AutovalidateMode.always,
+                            validator: (value){
+                              if(value == null || value == ''){
+                                return 'Please enter a short description about yourself.';
+                              }else{
+                                return null;
+                              }
+                            }
+                            ,
                             maxLines: 15,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -52,7 +68,24 @@ class create_account_profileDesc extends StatelessWidget{
                   ),
                   ElevatedButton(
                       onPressed: (){
-                        addHobbies(context);
+                        if(description.text == null || description.text == ''){
+                          showDialog<String>(context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Error'),
+                                content: Text('Please provide us with a little bit of description about yourself.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('Ok')
+                                  )
+                                ],
+                              )
+                          );
+                        }else{
+                          creationData.profile_desc = description.text;
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_hobbies(creationData: creationData))));
+                        }
+                        //addHobbies(context);
                       },
                       child: Text(
                           'Next'

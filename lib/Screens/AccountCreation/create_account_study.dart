@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
 
 class create_account_study extends StatelessWidget{
-  @override
 
+  dataPacket creationData;
+  create_account_study({Key? key, required this.creationData}) : super(key: key);
+  var yearFormData = 1;
+  var courseFormData = null;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
@@ -18,18 +23,24 @@ class create_account_study extends StatelessWidget{
                     fontSize: 20
                     ),
                 ),
-                CoursePicker(),
+                SizedBox(height: 15),
+                CoursePicker(onCourseChanged: (data) {courseFormData = data;}),
                 SizedBox(height:20),
                 Text('Which year of study are you currently in?',
                   style: TextStyle(
                     fontSize: 20
                   )
                 ),
-                YearOfStudyPicker(),
+                SizedBox(height: 15),
+                YearOfStudyPicker(onYearChanged: (data){yearFormData = data;}),
                 SizedBox(height:25),
                 ElevatedButton(
                     onPressed: (){
-                      uploadProfileDescription(context);
+                      //print(yearFormData);
+                      //print(courseFormData);
+                      creationData.year = yearFormData;
+                      creationData.course = courseFormData;
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_profileDesc(creationData: creationData,))));
                     },
                     child: Text(
                         'Next'
@@ -49,7 +60,8 @@ class create_account_study extends StatelessWidget{
 }
 
 class YearOfStudyPicker extends StatefulWidget{
-  YearOfStudyPicker({Key? key}) : super(key: key);
+  final ValueChanged <int> onYearChanged;
+  YearOfStudyPicker({Key? key, required this.onYearChanged}) : super(key: key);
 
   @override
   _YearOfStudyPickerWidgetState createState() => _YearOfStudyPickerWidgetState();
@@ -73,7 +85,8 @@ class _YearOfStudyPickerWidgetState extends State<YearOfStudyPicker>{
               ],
               itemExtent: 40,
               onSelectedItemChanged: (value) => {
-                setState( ()=> selectedValue = yearOfStudy[value],
+                widget.onYearChanged(yearOfStudy[value]),
+                setState( ()=> selectedValue = yearOfStudy[value]
                 ),
               },
             ),
@@ -86,6 +99,7 @@ class _YearOfStudyPickerWidgetState extends State<YearOfStudyPicker>{
   @override
   Widget build(buildContext){
     return Container(
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
         boxShadow: [BoxShadow(
             color: Color(0X3399DDC8),
@@ -99,7 +113,7 @@ class _YearOfStudyPickerWidgetState extends State<YearOfStudyPicker>{
         onTap: () => showYearPicker(),
         child: Text('${selectedValue}',
           style: TextStyle(
-            fontSize: 25
+            fontSize: 20
           ),
         )
       ),
@@ -110,16 +124,26 @@ class _YearOfStudyPickerWidgetState extends State<YearOfStudyPicker>{
 
 
 class CoursePicker extends StatefulWidget{
-  CoursePicker({Key? key}) : super(key: key);
+  final ValueChanged<String> onCourseChanged;
+  CoursePicker({Key? key, required this.onCourseChanged}) : super(key: key);
 
   @override
   _CoursePickerWidgetState createState() => _CoursePickerWidgetState();
 }
 
 class _CoursePickerWidgetState extends State<CoursePicker>{
-  final courseList = ['Computer Science','Chemical Engineering','Humanities','Psychology'];
   String selectedValue = '-Please Select a course-';
-
+  final courseList = ['Computer Science','Chemical Engineering','Humanities','Psychology','Mathematics'];
+  
+  cupertinoOptionsGenerator(List listOfCourses){
+    var optionsList = <Text>[];
+    courseList.sort();
+    listOfCourses.forEach((element){
+      optionsList.add(new Text(element));
+    });
+    return optionsList;
+  }
+  
   showCoursePicker(){       //still requires database to before coding it out properly.
     showModalBottomSheet(
       context: context,
@@ -127,14 +151,17 @@ class _CoursePickerWidgetState extends State<CoursePicker>{
         return GestureDetector(
           child: CupertinoPicker(
             magnification: 1.1,
-            children: const[
-              Text('Computer Science'),
-              Text('Chemical Engineering'),
-              Text('Humanities'),
-              Text('Psychology')
-            ],
+            children: cupertinoOptionsGenerator(courseList)
+            //const[
+              //Text('Computer Science'),
+              //Text('Chemical Engineering'),
+              //Text('Humanities'),
+              //Text('Psychology')
+            //]
+            ,
             itemExtent: 40,
             onSelectedItemChanged: (value) => {
+              widget.onCourseChanged(courseList[value]),
               setState( ()=> selectedValue = courseList[value],
               ),
             },
@@ -148,6 +175,7 @@ class _CoursePickerWidgetState extends State<CoursePicker>{
   @override
   Widget build(buildContext){
     return Container(
+      padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
           boxShadow: [BoxShadow(
               color: Color(0X3399DDC8),
@@ -161,7 +189,7 @@ class _CoursePickerWidgetState extends State<CoursePicker>{
           onTap: () => showCoursePicker(),
           child: Text('${selectedValue}',
             style: TextStyle(
-                fontSize: 25
+                fontSize: 18
             ),
           )
       ),

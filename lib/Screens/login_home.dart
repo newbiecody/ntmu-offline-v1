@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import '../Components/functs.dart';
+import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
 
 class loginScreen extends StatelessWidget{
+
+  dataPacket creationData = new dataPacket();
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -128,7 +132,8 @@ class loginScreen extends StatelessWidget{
                     padding: const EdgeInsets.fromLTRB(20,0,20,0),
                     child: ElevatedButton(
                         onPressed: (){
-                          createAccount(context);
+                          //createAccount(context);
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => create_account_email()));
                         },
                         child: Text('New here? Create an account'),
                         style: ElevatedButton.styleFrom(

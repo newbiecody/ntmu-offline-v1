@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 
 class create_account_confirmation extends StatelessWidget{
+
+  dataPacket creationData;
+  create_account_confirmation({Key? key, required this.creationData}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +21,12 @@ class create_account_confirmation extends StatelessWidget{
                     ),
                   ),
                   SizedBox(height: 25),
-                  Text('Name: *Insert name info here*'),
-                  Text('Email: *Insert email info here*'),
-                  Text('Birthday: *Insert birthday date here*'),
-                  Text('Bio: *Insert bio here*'),
-                  Text('Course: *Insert course here*'),
-                  Text('Year of study: *Insert year of study here*'),
+                  Text('Name: ${creationData.name}'),
+                  Text('Email: ${creationData.email}'),
+                  Text('Birthday: ${creationData.birthday}'),
+                  Text('Bio: ${creationData.profile_desc}'),
+                  Text('Course: ${creationData.course}'),
+                  Text('Year of study: ${creationData.year}'),
                   Text('Hobbies: *Insert bios here*'),
                   ElevatedButton(
                       onPressed: (){
