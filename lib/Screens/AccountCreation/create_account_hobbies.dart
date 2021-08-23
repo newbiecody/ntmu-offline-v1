@@ -74,6 +74,7 @@ class create_account_hobbies_State extends State<create_account_hobbies>{
                           if(_selections[counter] == true){
                             submitHobbies.add(hobby);
                           }
+                          counter+=1;
                         });
                         widget.creationData.hobbies = submitHobbies;
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_confirmation(creationData: widget.creationData))));

@@ -94,7 +94,8 @@ class create_account_profileDesc extends StatelessWidget{
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
                           minimumSize: Size(170,35)
                       )
-                  )
+                  ),
+                  SizedBox(height:25)
                 ]
               ),
             )
