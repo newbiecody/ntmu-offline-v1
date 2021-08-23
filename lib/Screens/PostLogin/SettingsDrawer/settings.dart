@@ -83,7 +83,7 @@ class _settingsPageState extends State<settingsPage> {
                         child: TextFormField(
                           autovalidateMode: AutovalidateMode.always,
                           validator: (value){
-                            (value!.isEmpty || value == null)? 'Please enter a new password.' : null;
+                            (value!.isEmpty || value == '')? 'Please enter a new password.' : null;
                           },
                           controller: newPasswordController1,
                           decoration: InputDecoration.collapsed(
@@ -101,7 +101,7 @@ class _settingsPageState extends State<settingsPage> {
                             if (newPasswordController1.text != value){
                               return 'Your new passwords don\'t match. Please try again...';
                             }
-                            (value!.isEmpty || value == null)? 'Please confirm your new password.' : null;
+                            (value!.isEmpty || value == '')? 'Please confirm your new password.' : null;
                           },
                           controller: newPasswordController2,
                           decoration: InputDecoration.collapsed(
