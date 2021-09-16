@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:intl/intl.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
+import 'package:ntmu/Models/dataPacket.dart';
 
 class create_account_birthday extends StatelessWidget{
 
@@ -11,69 +12,71 @@ class create_account_birthday extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('When is your birthday?',
-                  style: TextStyle(
-                    fontSize: 20
-                    ),
-                ),
-                SizedBox(
-                  height:25
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0X3399DDC8),
-                        spreadRadius: 3,
-                        blurRadius: 2,
-                        offset: Offset(0, 3), // changes position of shadow
-                      )],
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text('When is your birthday?',
+                    style: TextStyle(
+                      fontSize: 20
+                      ),
                   ),
-                  child: TimePickerWidget(onDateChanged: (newDateTime) {
-                    _selectedDate = newDateTime;
-                  },)
-                ),
-                SizedBox(
-                  height: 25
-                ),
-                ElevatedButton(
-                    onPressed: (){
-                      if(DateTime.now().year - _selectedDate.year < 17){
-                        showDialog<String>(context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Error'),
-                              content: Text('Please enter a valid birthday.' ),
-                              actions: <Widget>[
-                                TextButton(
-                                    onPressed: () => Navigator.pop(context, 'OK'),
-                                    child: const Text('Ok')
-                                )
-                              ],
-                            )
-                        );
-                      }else{
-                        creationData.birthday = _selectedDate;
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_study(creationData: creationData))));
-                      }
-                      },
-                    child: Text(
-                        'Next'
+                  SizedBox(
+                    height:25
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0X3399DDC8),
+                          spreadRadius: 3,
+                          blurRadius: 2,
+                          offset: Offset(0, 3), // changes position of shadow
+                        )],
                     ),
-                    style: ElevatedButton.styleFrom(
-                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                        minimumSize: Size(170,35)
-                    )
-                )
-              ],
+                    child: TimePickerWidget(onDateChanged: (newDateTime) {
+                      _selectedDate = newDateTime;
+                    },)
+                  ),
+                  SizedBox(
+                    height: 25
+                  ),
+                  ElevatedButton(
+                      onPressed: (){
+                        if(DateTime.now().year - _selectedDate.year < 17){
+                          showDialog<String>(context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Error'),
+                                content: Text('Please enter a valid birthday.' ),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('Ok')
+                                  )
+                                ],
+                              )
+                          );
+                        }else{
+                          creationData.birthday = _selectedDate;
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_study(creationData: creationData))));
+                        }
+                        },
+                      child: Text(
+                          'Next'
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                          minimumSize: Size(170,35)
+                      )
+                  )
+                ],
 
-            )
-        )
+              )
+          )
+      ),
     );
   }
 

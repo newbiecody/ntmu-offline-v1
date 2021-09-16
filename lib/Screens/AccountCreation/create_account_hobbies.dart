@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
+import 'package:ntmu/Models/dataPacket.dart';
 
 class create_account_hobbies extends StatefulWidget{
   dataPacket creationData;
@@ -27,7 +28,7 @@ class create_account_hobbies_State extends State<create_account_hobbies>{
           onPressed: () {
             setState(() {
               _selections[hobbies.indexOf(element)] = !_selections[hobbies.indexOf(element)];
-              print(_selections[hobbies.indexOf(element)]);
+              //print(_selections[hobbies.indexOf(element)]);
             });
           },
           child: Text(element),
@@ -47,53 +48,54 @@ class create_account_hobbies_State extends State<create_account_hobbies>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: 60),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text('What are some of your hobbies?',
-                      style: TextStyle(
-                        fontSize: 20
-                      )
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Column(children: createOptionButtons(listOfHobbies)),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                      onPressed: (){
-                        var counter = 0;
-                        var submitHobbies = <String>[];
-                        listOfHobbies.forEach((hobby) {
-                          if(_selections[counter] == true){
-                            submitHobbies.add(hobby);
-                          }
-                          counter+=1;
-                        });
-                        widget.creationData.hobbies = submitHobbies;
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_confirmation(creationData: widget.creationData))));
-                        accountCreationConfirmation(context);
-                      },
-                      child: Text(
-                          'Next'
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 60),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text('What are some of your hobbies?',
+                        style: TextStyle(
+                          fontSize: 20
+                        )
                       ),
-                      style: ElevatedButton.styleFrom(
-                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                          minimumSize: Size(170,35)
-                      )
-                  ),
-                  SizedBox(height: 20)
-                ],
+                    ),
+                    SizedBox(height: 20),
+                    Column(children: createOptionButtons(listOfHobbies)),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                        onPressed: (){
+                          var counter = 0;
+                          var submitHobbies = <String>[];
+                          listOfHobbies.forEach((hobby) {
+                            if(_selections[counter] == true){
+                              submitHobbies.add(hobby);
+                            }
+                            counter+=1;
+                          });
+                          widget.creationData.hobbies = submitHobbies;
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_confirmation(creationData: widget.creationData))));
+                        },
+                        child: Text(
+                            'Next'
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                            minimumSize: Size(170,35)
+                        )
+                    ),
+                    SizedBox(height: 20)
+                  ],
 
-              ),
-            )
-        )
+                ),
+              )
+          )
+      ),
     );
   }
 

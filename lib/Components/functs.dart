@@ -16,16 +16,6 @@ import 'package:ntmu/Screens/PostLogin/SettingsDrawer/preferences.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/feedback.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editProfile.dart';
 
-class dataPacket{
-  late String email;
-  late String name;
-  late DateTime birthday;
-  late List<String> hobbies;
-  late String password;
-  late String profile_desc;
-  late String course;
-  late int year;
-}
 
 MaterialColor CreateMaterialColor(Color color) {
   List strengths = <double>[.05];
@@ -84,28 +74,7 @@ void addHobbies(BuildContext context){
   //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_hobbies())));
 }
 
-void accountCreationConfirmation(BuildContext context){
-  //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_confirmation())));
-}
 
-void forgotPassword(){
-  //forget password options
-}
-
-void uploadPhoto(){
-  //upload photo from device
-}
-
-void RegisterNewAccountInformation(BuildContext context){
-  //send information to database, validate information and register user. Login into the main page(match with users).
-
-  userRecommendationPage(context);
-  //Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(())));
-}
-
-void userRecommendationPage(BuildContext context){
-  Navigator.of(context).pushNamedAndRemoveUntil('/userRecommendationPage', (Route<dynamic> route) => false);
-}
 
 void drawerProfile(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage())));
@@ -143,4 +112,82 @@ bool confirmEditPassword(){
   //Check current password, check if new and re-entered password is the same, then edit the password in database, then show success popup
   //else show failure popup and remove bring user back to settings page
   return true;
+}
+
+String hobbiesString(List<String> hobbiesList){
+  String hobbies = '';
+  hobbiesList.forEach((element) {
+    hobbies += element;
+    hobbies += ', ';
+  });
+  hobbies = hobbies.substring(0, hobbies.length-2);
+
+  return hobbies;
+}
+
+String timeFromNow(DateTime time) {
+  var differenceFromNow_year = DateTime
+      .now()
+      .year - time.year;
+  var differenceFromNow_month = DateTime
+      .now()
+      .month - time.month;
+  var differenceFromNow_day = DateTime
+      .now()
+      .day - time.day;
+  var differenceFromNow_hour = DateTime
+      .now()
+      .hour - time.hour;
+  var differenceFromNow_min = DateTime
+      .now()
+      .minute - time.minute;
+  var differenceFromNow_secs = DateTime
+      .now()
+      .second - time.second;
+
+  if (differenceFromNow_year > 0) {
+    if (differenceFromNow_year == 1){
+      return differenceFromNow_year.toString() + ' year ago';
+    } else {
+      return differenceFromNow_year.toString() + ' years ago';
+    }
+  } else {
+    if (differenceFromNow_month > 0) {
+      if (differenceFromNow_month == 1){
+        return differenceFromNow_month.toString() + ' month ago';
+      } else {
+        return differenceFromNow_month.toString() + ' months ago';
+      }
+    } else {
+      if (differenceFromNow_day > 0) {
+        if (differenceFromNow_day == 1){
+          return differenceFromNow_day.toString() + ' day ago';
+        } else {
+          return differenceFromNow_day.toString() + ' days ago';
+        }
+      } else {
+        if (differenceFromNow_hour > 0) {
+          if (differenceFromNow_hour == 1){
+            return differenceFromNow_hour.toString() + ' hour ago';
+          } else {
+            return differenceFromNow_hour.toString() + ' hours ago';
+          }
+        } else {
+          if (differenceFromNow_min > 0) {
+            if (differenceFromNow_min == 1){
+              return differenceFromNow_min.toString() + ' minute ago';
+            } else {
+              return differenceFromNow_min.toString() + ' minutes ago';
+            }
+          } else {
+            if (differenceFromNow_secs > 10) {
+              return differenceFromNow_secs.toString() + ' seconds ago';
+            } else {
+              return 'Just now';
+            }
+          }
+        }
+      }
+    }
+  }
 }

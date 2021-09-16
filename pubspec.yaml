@@ -29,6 +29,7 @@ dependencies:
   intl: ^0.17.0
   flutter_secure_storage: ^4.2.1
   email_validator: ^1.0.0
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
@@ -41,14 +42,14 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    - images/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -62,7 +63,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: BalsamiqSans
+      fonts:
+        - asset: assets/BalsamiqSans-Regular.ttf
+        - asset: assets/BalsamiqSans-Italic.ttf
+          style: italic
+        - asset: assets/BalsamiqSans-Bold.ttf
+          weight: 700
+        #- asset: BalsamiqSans-BoldItalic.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

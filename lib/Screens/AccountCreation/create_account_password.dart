@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_name.dart';
+import 'package:ntmu/Models/dataPacket.dart';
 
 class create_account_password extends StatelessWidget{
 
@@ -14,65 +15,79 @@ class create_account_password extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Set a password!',
-                style: TextStyle(
-                  fontSize: 20
-                ),),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 62.5),
-                    child: TextFormField(
-                      maxLength: 50,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                          counterText: ''
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text('Set a password!',
+                  style: TextStyle(
+                    fontSize: 20
+                  ),),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 62.5),
+                      child: TextFormField(
+                        maxLength: 50,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                            counterText: ''
+                        ),
+                        obscureText: _obsecurePassword_one,
+                        controller: passwordController_one,
                       ),
-                      obscureText: _obsecurePassword_one,
-                      controller: passwordController_one,
-                    ),
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                Text('Re-type your password to confirm.',
-                style: TextStyle(
-                  fontSize: 20
-                ),),
-                Container(
-                    padding: EdgeInsets.symmetric(horizontal: 62.5),
-                    child: TextFormField(
-                      obscureText: _obsecurePassword_two,
-                      autovalidateMode: AutovalidateMode.always,
-                      controller: passwordController_two,
-                      validator: (value) {
-                        if (value.toString() != passwordController_one.text){
-                          return 'The passwords do not match. Please try again';
-                        }else{
-                          return null;
-                        }
-                      },
-                      maxLength: 50,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                          counterText: ''
-                      ),
-                    )
-                ),
-                SizedBox(
-                  height: 25,
-                ),
-                ElevatedButton(
-                    onPressed: (){
-                    if(passwordController_one.text == '' || passwordController_two.text == ''){
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Text('Re-type your password to confirm.',
+                  style: TextStyle(
+                    fontSize: 20
+                  ),),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 62.5),
+                      child: TextFormField(
+                        obscureText: _obsecurePassword_two,
+                        autovalidateMode: AutovalidateMode.always,
+                        controller: passwordController_two,
+                        validator: (value) {
+                          if (value.toString() != passwordController_one.text){
+                            return 'The passwords do not match. Please try again';
+                          }else{
+                            return null;
+                          }
+                        },
+                        maxLength: 50,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                            counterText: ''
+                        ),
+                      )
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  ElevatedButton(
+                      onPressed: (){
+                      if(passwordController_one.text == '' || passwordController_two.text == ''){
+                          showDialog<String>(context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                title: const Text('Error'),
+                                content: Text('Please choose a password and confirm your password again please.' ),
+                                actions: <Widget>[
+                                  TextButton(
+                                      onPressed: () => Navigator.pop(context, 'OK'),
+                                      child: const Text('Ok')
+                                  )
+                                ],
+                              )
+                          );
+                        }else if(passwordController_one.text != passwordController_two.text){
                         showDialog<String>(context: context,
                             builder: (BuildContext context) => AlertDialog(
                               title: const Text('Error'),
-                              content: Text('Please choose a password and confirm your password again please.' ),
+                              content: Text('Your passwords don\'t match, please try again.' ),
                               actions: <Widget>[
                                 TextButton(
                                     onPressed: () => Navigator.pop(context, 'OK'),
@@ -81,37 +96,25 @@ class create_account_password extends StatelessWidget{
                               ],
                             )
                         );
-                      }else if(passwordController_one.text != passwordController_two.text){
-                      showDialog<String>(context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Error'),
-                            content: Text('Your passwords don\'t match, please try again.' ),
-                            actions: <Widget>[
-                              TextButton(
-                                  onPressed: () => Navigator.pop(context, 'OK'),
-                                  child: const Text('Ok')
-                              )
-                            ],
-                          )
-                      );
-                    }else{
-                        creationData.email = email;
-                        creationData.password = passwordController_one.text;
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_name(creationData: creationData))));
-                      }
-                      },
-                      child: Text(
-                      'Next'
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                        minimumSize: Size(170,35)
-                    )
-                )
-              ],
+                      }else{
+                          creationData.email = email;
+                          creationData.password = passwordController_one.text;
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_name(creationData: creationData))));
+                        }
+                        },
+                        child: Text(
+                        'Next'
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                          minimumSize: Size(170,35)
+                      )
+                  )
+                ],
 
-            )
-        )
+              )
+          )
+      ),
     );
   }
 

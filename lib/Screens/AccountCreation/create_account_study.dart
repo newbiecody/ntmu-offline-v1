@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
+import 'package:ntmu/Models/dataPacket.dart';
 
 class create_account_study extends StatelessWidget{
 
@@ -12,48 +13,50 @@ class create_account_study extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('What is your course of study?',
-                  style: TextStyle(
-                    fontSize: 20
-                    ),
-                ),
-                SizedBox(height: 15),
-                CoursePicker(onCourseChanged: (data) {courseFormData = data;}),
-                SizedBox(height:20),
-                Text('Which year of study are you currently in?',
-                  style: TextStyle(
-                    fontSize: 20
-                  )
-                ),
-                SizedBox(height: 15),
-                YearOfStudyPicker(onYearChanged: (data){yearFormData = data;}),
-                SizedBox(height:25),
-                ElevatedButton(
-                    onPressed: (){
-                      //print(yearFormData);
-                      //print(courseFormData);
-                      creationData.year = yearFormData;
-                      creationData.course = courseFormData;
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_profileDesc(creationData: creationData,))));
-                    },
-                    child: Text(
-                        'Next'
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                        minimumSize: Size(170,35)
+    return SafeArea(
+      child: Scaffold(
+          body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text('What is your course of study?',
+                    style: TextStyle(
+                      fontSize: 20
+                      ),
+                  ),
+                  SizedBox(height: 15),
+                  CoursePicker(onCourseChanged: (data) {courseFormData = data;}),
+                  SizedBox(height:20),
+                  Text('Which year of study are you currently in?',
+                    style: TextStyle(
+                      fontSize: 20
                     )
-                )
-              ],
+                  ),
+                  SizedBox(height: 15),
+                  YearOfStudyPicker(onYearChanged: (data){yearFormData = data;}),
+                  SizedBox(height:25),
+                  ElevatedButton(
+                      onPressed: (){
+                        //print(yearFormData);
+                        //print(courseFormData);
+                        creationData.year = yearFormData;
+                        creationData.course = courseFormData;
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_profileDesc(creationData: creationData,))));
+                      },
+                      child: Text(
+                          'Next'
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                          minimumSize: Size(170,35)
+                      )
+                  )
+                ],
 
-            )
-        )
+              )
+          )
+      ),
     );
   }
 

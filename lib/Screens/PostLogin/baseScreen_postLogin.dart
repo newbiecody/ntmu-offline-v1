@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/matches.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/forum.dart';
+import 'package:ntmu/Models/dataPacket.dart';
 
 class baseScreen_postLogin extends StatefulWidget{
-  const baseScreen_postLogin({Key? key}) : super(key:key);
+  dataPacket userData;
+  baseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
 
   @override
   State<baseScreen_postLogin> createState() => _baseScreen_postLoginState();
 }
 
 class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
+/*
+  late dataPacket userData;
+  _baseScreen_postLoginState(dataPacket userData){
+    this.userData = userData;
+  }
+*/
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index){
@@ -17,16 +28,20 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
       _selectedIndex = index;
     });
   }
+  generateMainPage(dataPacket userData){
+    List<Widget> _widgetOptions = [
+      recommendationPage(userData: userData),
+      messagesPage(userData: userData),
+      forumPage(userData: userData)
+    ];
+    return _widgetOptions;
 
-  static const List<Widget> _widgetOptions = [
-    Text('page1'),
-    Text('Page2'),
-    Text('Page3')
-  ];
+  }
+
 
   @override
   Widget build(BuildContext context){
-    return Scaffold(
+    return SafeArea(child: Scaffold(
         appBar: AppBar(
             leading: Builder(
               builder: (BuildContext context){
@@ -146,7 +161,7 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
             ],
           ),
         ),
-        body: _widgetOptions[_selectedIndex],
+        body: generateMainPage(widget.userData)[_selectedIndex],
         bottomNavigationBar:BottomNavigationBar(
           backgroundColor: Color(0XFF50808E),
           selectedItemColor: Color(0XFFFFFFFF),
@@ -169,6 +184,7 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
             ),
           ],
         )
+    )
     );
 
   }
