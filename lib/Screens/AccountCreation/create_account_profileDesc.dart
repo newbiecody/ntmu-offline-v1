@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_profileDesc extends StatelessWidget{
 
   final description = new TextEditingController();
-  dataPacket creationData;
+  LoggedUserInfo creationData;
   create_account_profileDesc({Key? key, required this.creationData}) : super(key: key);
 
   @override

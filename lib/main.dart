@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
 import 'Screens/login_home.dart';
 import 'Components/functs.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 // @dart=2.9
 
@@ -11,7 +11,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  dataPacket userData = new dataPacket();
+  LoggedUserInfo userData = new LoggedUserInfo();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

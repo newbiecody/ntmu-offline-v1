@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import '../Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class loginScreen extends StatelessWidget{
 
-  dataPacket creationData = new dataPacket();
+  LoggedUserInfo creationData = new LoggedUserInfo();
 
   @override
   Widget build(BuildContext context){

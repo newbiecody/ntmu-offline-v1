@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:intl/intl.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_birthday extends StatelessWidget{
 
-  dataPacket creationData = new dataPacket();
+  LoggedUserInfo creationData = new LoggedUserInfo();
   DateTime _selectedDate = DateTime.now();
   create_account_birthday({Key? key, required this.creationData}) : super(key: key);
 

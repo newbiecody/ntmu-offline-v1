@@ -1,44 +1,152 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/dataPacket.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/listView_individualChat.dart';
-import 'package:ntmu/Models/chatUser.dart';
+import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
-class messagesPage extends StatefulWidget{
-  dataPacket userData;
-  messagesPage({Key? key, required this.userData}) : super(key:key);
+import 'ForumWidgets/openForumThread.dart';
+
+class forumPage extends StatefulWidget{
+  LoggedUserInfo userData;
+  forumPage({Key? key, required this.userData}) : super(key:key);
 
   @override
-  State<messagesPage> createState() => messagesPageState();
+  State<forumPage> createState() => forumPageState();
 }
 
-class messagesPageState extends State<messagesPage>{
-
-  List<chatUser> chatUsers = [
-    chatUser(name: 'Amarla', time: DateTime.parse("2021-07-20 20:18:04"), imageURL: 'images/forFlutterDP1.jpg', messageText: 'Hello1'),
-    chatUser(name: 'John', time: DateTime.parse("2021-05-20 20:18:04"), imageURL: 'images/forFlutterDP2.jpg', messageText: 'Hello2'),
-    chatUser(name: 'Raini', time: DateTime.parse("2021-06-20 20:18:04"), imageURL: 'images/forFlutterDP3.jpg', messageText: 'Hello3'),
-    chatUser(name: 'Jerome', time: DateTime.parse("2021-07-18 20:18:04"), imageURL: 'images/forFlutterDP4.jpg', messageText: 'Hello4'),
-    chatUser(name: 'Jaini', time: DateTime.parse("2021-07-19 20:18:04"), imageURL: 'images/forFlutterDP5.jpg', messageText: 'Hello5'),
-    chatUser(name: 'Remy', time: DateTime.parse("2021-07-20 20:18:04"), imageURL: 'images/forFlutterDP6.jpg', messageText: 'Hello6'),
-    chatUser(name: 'Rayson', time: DateTime.parse("2020-07-20 20:18:04"), imageURL: 'images/forFlutterDP7.jpg', messageText: 'Hello7'),
-    chatUser(name: 'Jo', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP8.jpg', messageText: 'Hello8'),
-    chatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: 'Hello9'),
-    chatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: 'Hello9'),
-    chatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: 'Hello9'),
-
+class forumPageState extends State<forumPage>{
+  List <ForumPostHeaderInfo> forumPagePosts = [
+    ForumPostHeaderInfo(headerContent: 'What the heck is happening', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: [], comments: ['llol'], originalPoster: 'Danny', lastLikedDateTime: null, timeOfPost: DateTime.now(), tags: []),
+    ForumPostHeaderInfo(headerContent: 'I\'m just testing 1', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: ['Jonng'], comments: ['hello 123', 'llol'], originalPoster: 'Jamie', lastLikedDateTime: DateTime.parse("2021-10-15 20:18:04"), timeOfPost: DateTime.now(), tags: ['Testing3211', 'Testing311', 'Testing154', 'Testing154', 'Testing154', 'Testing154', 'Testing154', 'Testing154', 'Testing154']),
+    ForumPostHeaderInfo(headerContent: 'I\'m just testing 2', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: ['Louis', 'Jamie'], comments: ['Testing 1', 'Testing 12', 'Testing 14'], originalPoster: 'Anwar', lastLikedDateTime: DateTime.parse("2021-10-16 20:18:04"), timeOfPost: DateTime.now(), tags: ['Testing541', 'Testing1754', 'Testing1']),
+    ForumPostHeaderInfo(headerContent: 'I\'m just testing 23', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: ['Louis', 'Jamie'], comments: ['Testing 121', 'Testing 1521'], originalPoster: 'Josiah', lastLikedDateTime: DateTime.parse("2021-10-17 20:18:04"), timeOfPost: DateTime.now(), tags: ['Testing7751','Testing451']),
+    ForumPostHeaderInfo(headerContent: 'I\'m just testing 41', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: ['Louis', 'John'], comments: ['Testing 1231'], originalPoster: 'John', lastLikedDateTime: DateTime.parse("2021-10-18 20:18:04"), timeOfPost: DateTime.now(), tags: ['Testing761']),
+    ForumPostHeaderInfo(headerContent: 'I\'m just testing 10', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', likedBy: ['Louis', 'Josiah'], comments: ['Testing 215121'], originalPoster: 'Harry', lastLikedDateTime: DateTime.parse("2021-10-19 20:18:04"), timeOfPost: DateTime.now(), tags: ['Testing1657'])
   ];
+
+
+
   @override
   Widget build(BuildContext context){
-    return Center(
-      child:
-      ListView.builder(
-        itemBuilder: (context, index){
-      return Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: individualChatWidget(individualChat: chatUsers[index]));
-    },
-    itemCount: chatUsers.length,
-    )
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: (){
+
+                  },
+                  child: Text(
+                      'Popular'
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20)),
+                      minimumSize: Size(100,35)
+                  )
+              ),
+              SizedBox(width: 50),
+              ElevatedButton(
+                  onPressed: (){
+
+                  },
+                  child: Text(
+                      'Newest'
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(20)),
+                      minimumSize: Size(100,35)
+                  )
+              )
+            ],
+          ),
+          Divider(thickness: 1),
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: forumPagePosts.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(OpenForumThread(individualPost: forumPagePosts[index]))));
+                },
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('${forumPagePosts[index].originalPoster} - ${timeFromNow(forumPagePosts[index].timeOfPost)}',
+                                style: TextStyle(
+                                  fontSize: 12
+                                ),
+                                )
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        Text(forumPagePosts[index].headerContent,
+                          style: TextStyle(
+                            fontSize: 16
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                          child: Row(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  IconButton(
+                                      onPressed: (){},
+                                      icon: Icon(Icons.arrow_circle_up_outlined)),
+                                  Text(forumPagePosts[index].likedBy.length.toString()),
+                                  IconButton(
+                                      onPressed: (){},
+                                      icon: Icon(Icons.arrow_circle_down_outlined))
+                                ],
+                              ),
+                              Expanded(
+                                  child: SizedBox(
+                                    height: 12,
+                                  )
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal:20),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.chat_bubble_outline),
+                                    SizedBox(width: 8.0),
+                                    Text(forumPagePosts[index].comments.length.toString())
+                                  ]
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: Wrap(
+                              spacing: 16,
+                              runSpacing: 8,
+                              children: generateTags(forumPagePosts[index].tags),
+                            ),
+                          ),
+                        ),
+                        Divider(thickness: 1)
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );}
 }

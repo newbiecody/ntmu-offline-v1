@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_hobbies extends StatefulWidget{
-  dataPacket creationData;
+  LoggedUserInfo creationData;
   create_account_hobbies({Key? key, required this.creationData}) : super(key:key);
   @override
   State<create_account_hobbies> createState() => create_account_hobbies_State();

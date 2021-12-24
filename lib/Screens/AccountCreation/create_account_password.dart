@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_name.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_password extends StatelessWidget{
 
-  dataPacket creationData = new dataPacket();
+  LoggedUserInfo creationData = new LoggedUserInfo();
   String email;
   final passwordController_one = TextEditingController();
   final passwordController_two = TextEditingController();

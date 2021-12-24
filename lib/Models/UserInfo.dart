@@ -1,6 +1,6 @@
 //used in account creation, possibly reused to retrieve different user data
 
-class dataPacket{
+class LoggedUserInfo{
   late String email;
   late String name;
   late DateTime birthday;

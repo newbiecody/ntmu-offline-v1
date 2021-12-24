@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/announcements.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/chats.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/notifications.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/yourposts.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class forumPage extends StatefulWidget{
-  dataPacket userData;
-  forumPage({Key? key, required this.userData}) : super(key:key);
+class messagesPage extends StatefulWidget{
+  LoggedUserInfo userData;
+  messagesPage({Key? key, required this.userData}) : super(key:key);
 
   @override
-  State<forumPage> createState() => forumPageState();
+  State<messagesPage> createState() => messagesPageState();
 }
 
-class forumPageState extends State<forumPage>{
+class messagesPageState extends State<messagesPage>{
   static int userClickOption = 0;
   //notif, announcement, chats, yourposts corresponds to index 0,1,2,3 of _selectedOption
   static List <bool> _selectedOption = [true,false,false,false];
@@ -44,7 +43,7 @@ class forumPageState extends State<forumPage>{
           });
       },
       maxHeight: MediaQuery.of(context).size.height,
-      minHeight: 150,
+      minHeight: MediaQuery.of(context).size.height*.6,
       //controller: _pc,
       //panelBuilder: (ScrollController sc) => _scrollingList(sc, _pc.isPanelOpen),
       panelBuilder: (ScrollController sc) => _scrollingList(sc, _isPanelOpenNow),

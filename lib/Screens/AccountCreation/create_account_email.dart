@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_password.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_email extends StatelessWidget{
 
-  dataPacket creationData = new dataPacket();
+  LoggedUserInfo creationData = new LoggedUserInfo();
   //create_account_email({Key? key, required this.creationData}) : super(key: key);
   final emailInputController = TextEditingController();
   @override

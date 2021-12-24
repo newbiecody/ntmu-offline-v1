@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_confirmation extends StatelessWidget{
 
-  dataPacket creationData;
+  LoggedUserInfo creationData;
   create_account_confirmation({Key? key, required this.creationData}) : super(key: key);
 
   final DateFormat formatter = DateFormat('d MMMM y');

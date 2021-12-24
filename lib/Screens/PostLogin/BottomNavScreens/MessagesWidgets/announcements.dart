@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/announcementHeaderInfo.dart';
+import 'package:ntmu/Models/AnnouncementHeaderInfo.dart';
 
 
 class announcements extends StatefulWidget{
@@ -14,9 +14,9 @@ class announcements extends StatefulWidget{
 }
 
 class announcementsState extends State<announcements>{
-  List<announcementHeaderInfo> announcementsList = [
-    announcementHeaderInfo(poster: 'Admin', messageText: 'Welcome to NTmU! I hope that you will enjoy your stay here', time: DateTime.parse("2021-07-20 20:18:04")),
-    announcementHeaderInfo(poster: 'Admin', messageText: 'There are some patches that had been added to ', time: DateTime.parse("2021-09-16 20:18:04"))
+  List<AnnouncementHeaderInfo> announcementsList = [
+    AnnouncementHeaderInfo(poster: 'Admin', messageText: 'Welcome to NTmU! I hope that you will enjoy your stay here', time: DateTime.parse("2021-07-20 20:18:04")),
+    AnnouncementHeaderInfo(poster: 'Admin', messageText: 'There are some patches that had been added to ', time: DateTime.parse("2021-09-16 20:18:04"))
   ];
 
   generateAnnouncements(List announcements){
@@ -40,6 +40,7 @@ class announcementsState extends State<announcements>{
       announcementTiles.add(Divider(thickness: 1));
       }
     );
+    announcementTiles.add(SizedBox(height: 150));
     return announcementTiles;
   }
 

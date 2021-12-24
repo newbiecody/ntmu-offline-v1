@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_study extends StatelessWidget{
 
-  dataPacket creationData;
+  LoggedUserInfo creationData;
   create_account_study({Key? key, required this.creationData}) : super(key: key);
   var yearFormData = 1;
-  var courseFormData = null;
+  var courseFormData = 'Accountancy';
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,6 @@ class create_account_study extends StatelessWidget{
                   SizedBox(height:25),
                   ElevatedButton(
                       onPressed: (){
-                        //print(yearFormData);
-                        //print(courseFormData);
                         creationData.year = yearFormData;
                         creationData.course = courseFormData;
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_profileDesc(creationData: creationData,))));
@@ -135,12 +133,14 @@ class CoursePicker extends StatefulWidget{
 }
 
 class _CoursePickerWidgetState extends State<CoursePicker>{
-  String selectedValue = '-Please Select a course-';
-  final courseList = ['Computer Science','Chemical Engineering','Humanities','Psychology','Mathematics'];
-  
+
+  //final courseList = readByLine_txt('assets/allcourses.txt');
+  final courseList = list_allCourses;
+  String selectedValue = list_allCourses[0];
+
   cupertinoOptionsGenerator(List listOfCourses){
     var optionsList = <Text>[];
-    courseList.sort();
+    listOfCourses.sort();
     listOfCourses.forEach((element){
       optionsList.add(new Text(element));
     });
@@ -153,16 +153,9 @@ class _CoursePickerWidgetState extends State<CoursePicker>{
       builder: (BuildContext context){
         return GestureDetector(
           child: CupertinoPicker(
-            magnification: 1.1,
-            children: cupertinoOptionsGenerator(courseList)
-            //const[
-              //Text('Computer Science'),
-              //Text('Chemical Engineering'),
-              //Text('Humanities'),
-              //Text('Psychology')
-            //]
-            ,
-            itemExtent: 40,
+            magnification: 0.8,
+            children: cupertinoOptionsGenerator(courseList),
+            itemExtent: 60,
             onSelectedItemChanged: (value) => {
               widget.onCourseChanged(courseList[value]),
               setState( ()=> selectedValue = courseList[value],

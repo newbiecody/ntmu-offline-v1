@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_password.dart';
@@ -190,4 +191,119 @@ String timeFromNow(DateTime time) {
       }
     }
   }
+}
+
+Future<List<String>> readByLine_txt(String path) async {
+  String rawTxt = await rootBundle.loadString('path');
+  List<String> list_readItemsByLine = rawTxt.split('\n');
+  return list_readItemsByLine;
+}
+
+final list_allCourses = [
+'Accountancy',
+'Accountancy (GA)',
+'Accountancy (GB)',
+'Accountancy And Business',
+'Aerospace Engineering',
+'Aerospace Engineering And Economics',
+'Art, Design & Media',
+'Art, Design & Media (ADM)',
+'Art, Design & Media (ANIM)',
+'Art, Design & Media (DA)',
+'Art, Design & Media (DIPH)',
+'Art, Design & Media (FILM)',
+'Art, Design & Media (INME)',
+'Art, Design & Media (MA)',
+'Art, Design & Media (PROD)',
+'Art, Design & Media (VISC)',
+'Bioengineering',
+'Bioengineering And Economics',
+'Biological Sciences',
+'Biological Sciences And Psychology',
+'Biomedical Sciences',
+'Biomedical Sciences And Biobusiness',
+'Business',
+'Business And Computer Engineering',
+'Business And Computing',
+'Chemical & Biomolecular Engineering',
+'Chemical & Biomolecular Engineering And Economics',
+'Chemistry and Biological Chemistry',
+'Chinese',
+'Civil Engineering',
+'Civil Engineering And Economics',
+'Communication Studies',
+'Computer Engineering',
+'Computer Engineering And Economics',
+'Computer Science',
+'Computer Science And Economics',
+'Data Science And Artificial Intelligence',
+'Economics',
+'Economics And Media Analytics',
+'Economics And Psychology',
+'Economics And Public Policy & Global Affairs',
+'Electrical & Electronic Engineering',
+'Electrical & Electronic Engineering And Economics',
+'Engineering',
+'Engineering (CEE)',
+'Engineering (EEE)',
+'Engineering (ENE)',
+'Engineering (ME)',
+'English',
+'English Literature And Art History',
+'Environmental Earth Systems Science',
+'Environmental Earth Systems Science And Public Policy & Global Affairs',
+'Environmental Engineering',
+'Environmental Engineering And Economics',
+'History',
+'Humanities',
+'Information Engineering & Media',
+'Information Engineering & Media And Economics',
+'Linguistics & Multilingual Studies',
+'Maritime Studies',
+'Maritime Studies (ITG)',
+'Maritime Studies (MSB)',
+'Materials Engineering',
+'Materials Engineering And Economics',
+'Mathematical And Computer Sciences',
+'Mathematical Sciences',
+'Mathematical Sciences And Economics',
+'Mathematics & Economics',
+'Mechanical Engineering',
+'Mechanical Engineering And Economics',
+'Philosophy',
+'Physical and Mathematical Sciences',
+'Physics and Applied Physics',
+'Psychology',
+'Psychology And Linguistics & Multilingual Studies',
+'Psychology And Media Analytics',
+'Public Policy And Global Affairs',
+'Renaissance Engineering',
+'Social Sciences',
+'Sociology',
+'Sport Science & Management',
+];
+
+generateTags(List list_of_tags){
+  List <Widget> list_of_tags_widget = [];//[SizedBox(width: 16)];
+  if(list_of_tags.length>0) {
+    list_of_tags.forEach((element) {
+      list_of_tags_widget.add(
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+            decoration: BoxDecoration(
+                color: Color(0XFF99DDC8),
+                borderRadius: BorderRadius.circular(10)
+            ),
+            child: Text(element),
+          )
+      );
+    });
+  }
+  return list_of_tags_widget;
+
+}
+
+retrieveComments(String postID){
+  //fake comment generation
+
 }

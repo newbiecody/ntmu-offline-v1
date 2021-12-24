@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_birthday.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 
 class create_account_name extends StatelessWidget{
 
-  dataPacket creationData = new dataPacket();
+  LoggedUserInfo creationData = new LoggedUserInfo();
   final nameController = new TextEditingController();
 
   create_account_name({Key? key, required this.creationData}) : super(key: key);

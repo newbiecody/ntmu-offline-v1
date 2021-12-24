@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Models/chatUser.dart';
+import 'package:ntmu/Models/ChatUser.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/openChatPage.dart';
 
 import 'dart:math';
 
 class individualChatWidget extends StatefulWidget{
-  chatUser individualChat;
+  ChatUser individualChat;
   individualChatWidget({Key? key, required this.individualChat});
   @override
   State<individualChatWidget> createState() => individualChatWidgetState();
@@ -15,6 +15,8 @@ class individualChatWidget extends StatefulWidget{
 class individualChatWidgetState extends State<individualChatWidget> {
 
   static bool _imageError = false;
+  
+  List textMessages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class individualChatWidgetState extends State<individualChatWidget> {
                 style: TextStyle(
                   fontSize: 16
                 ),),
-                Text(widget.individualChat.messageText)
+                Text(widget.individualChat.messageText.last)
               ],
             ),
             Expanded(child: Container()),

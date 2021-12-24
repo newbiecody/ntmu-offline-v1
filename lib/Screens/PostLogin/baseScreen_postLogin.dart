@@ -3,10 +3,10 @@ import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/matches.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/forum.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class baseScreen_postLogin extends StatefulWidget{
-  dataPacket userData;
+  LoggedUserInfo userData;
   baseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -28,11 +28,11 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
       _selectedIndex = index;
     });
   }
-  generateMainPage(dataPacket userData){
+  generateMainPage(LoggedUserInfo userData){
     List<Widget> _widgetOptions = [
       recommendationPage(userData: userData),
-      messagesPage(userData: userData),
-      forumPage(userData: userData)
+      forumPage(userData: userData),
+      messagesPage(userData: userData)
     ];
     return _widgetOptions;
 
@@ -42,6 +42,15 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
   @override
   Widget build(BuildContext context){
     return SafeArea(child: Scaffold(
+      floatingActionButton: Visibility(
+        visible: _selectedIndex == 1 ? true : false,
+        child: FloatingActionButton(
+          onPressed: (){},
+          child: const Icon(
+            Icons.post_add_rounded
+          )
+        ),
+      ),
         appBar: AppBar(
             leading: Builder(
               builder: (BuildContext context){

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/dataPacket.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 
 class recommendationPage extends StatefulWidget{
-  dataPacket userData;
+  LoggedUserInfo userData;
   recommendationPage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -116,7 +116,7 @@ class recommendationPageState extends State<recommendationPage>{
                                   'Accept'
                               ),
                               style: ElevatedButton.styleFrom(
-                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                                   minimumSize: Size(100,35)
                               )
                           ),
@@ -129,7 +129,7 @@ class recommendationPageState extends State<recommendationPage>{
                                   'Reject'
                               ),
                               style: ElevatedButton.styleFrom(
-                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
                                   minimumSize: Size(100,35)
                               )
                           ),

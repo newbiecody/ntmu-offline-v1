@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Models/forumPostHeaderInfo.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/YourPostsWidgets/openForumThread.dart';
+import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/openForumThread.dart';
 
 class individualPostWidget extends StatefulWidget{
-  forumPostHeaderInfo postHeaderInfo;
+  ForumPostHeaderInfo postHeaderInfo;
   individualPostWidget({Key? key, required this.postHeaderInfo});
 
   @override
@@ -48,7 +48,7 @@ class individualPostWidgetState extends State<individualPostWidget> {
           ),
           child: Column(
             children: <Widget>[
-              Text(widget.postHeaderInfo.leadingContent.trim()),
+              Text(widget.postHeaderInfo.headerContent.trim()),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
