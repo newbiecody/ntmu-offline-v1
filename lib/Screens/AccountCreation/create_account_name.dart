@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_name extends StatelessWidget{
 
-  LoggedUserInfo creationData = new LoggedUserInfo();
+  UserInfo creationData = new UserInfo();
   final nameController = new TextEditingController();
 
   create_account_name({Key? key, required this.creationData}) : super(key: key);

@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class editProfilePage extends StatefulWidget{
-  const editProfilePage({Key? key}) : super(key:key);
+  UserInfo userData;
+  editProfilePage({Key? key, required this.userData}) : super(key:key);
 
   @override
   State<editProfilePage> createState() => _editProfilePageState();
@@ -72,9 +74,9 @@ class _editProfilePageState extends State<editProfilePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('John Doe',
+                  child: Text(widget.userData.name,
                     style: TextStyle(
-                      color: Color(0X80000000)
+                      color: Colors.grey
                     ),
                   ),
                 )
@@ -95,7 +97,8 @@ class _editProfilePageState extends State<editProfilePage> {
                             child: Text('Age',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 16
+                                  fontSize: 16,
+                                  color: Colors.grey
                               ),
                             ),
                             alignment: Alignment.centerLeft,
@@ -110,9 +113,9 @@ class _editProfilePageState extends State<editProfilePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text('26',
+                    child: Text((DateTime.now().year - widget.userData.birthday.year).toString(),
                       style: TextStyle(
-                          color: Color(0X80000000)
+                          color: Colors.grey
                       ),
                     ),
                   )
@@ -150,7 +153,7 @@ class _editProfilePageState extends State<editProfilePage> {
                     alignment: Alignment.centerLeft,
                     child: Text('Male',
                       style: TextStyle(
-                          color: Color(0X80000000)
+                          color: Colors.grey
                       ),
                     ),
                   )
@@ -186,7 +189,7 @@ class _editProfilePageState extends State<editProfilePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: TextField(
                   style: TextStyle(
-                      color: Color(0X80000000),
+                      color: Colors.grey,
                       fontSize: 14
                   ),
                   decoration: InputDecoration.collapsed(hintText: ''),
@@ -219,16 +222,21 @@ class _editProfilePageState extends State<editProfilePage> {
                     ]
                   )
               ),
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Badminton, Bowling, Cheerleading, Music, Scuba Diving, Singing, Watching movies, Whale watching',
-                      style: TextStyle(
-                          color: Color(0X80000000)
+              GestureDetector(
+                onTap: (){
+
+                },
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Badminton, Bowling, Cheerleading, Music, Scuba Diving, Singing, Watching movies, Whale watching',
+                        style: TextStyle(
+                            color: Color(0X80000000)
+                        ),
                       ),
-                    ),
-                  )
+                    )
+                ),
               ),
               Container(
                   padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -260,13 +268,13 @@ class _editProfilePageState extends State<editProfilePage> {
                 child: Container(
                   child: TextField(
                     style: TextStyle(
-                        color: Color(0X80000000),
+                        color: Colors.black,
                         fontSize: 14
                     ),
-                    maxLength: 300,
+                    //maxLength: 300,
                     maxLines: null,
                     decoration: InputDecoration.collapsed(hintText: ''),
-                    controller: TextEditingController(text: 'Funny open minded and optimistic guy who is into sports and recently into Scuba diving. I’m a Capricorn:) ESFJ-S. I may not look like one but I’m Chinese mixed Korean who is born and bred in Singapore :)'),
+                    controller: TextEditingController(text: widget.userData.profile_desc),
                   ),
                 ),
               ),

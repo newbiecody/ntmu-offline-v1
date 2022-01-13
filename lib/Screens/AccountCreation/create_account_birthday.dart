@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_birthday extends StatelessWidget{
 
-  LoggedUserInfo creationData = new LoggedUserInfo();
+  UserInfo creationData = new UserInfo();
   DateTime _selectedDate = DateTime.now();
   create_account_birthday({Key? key, required this.creationData}) : super(key: key);
 

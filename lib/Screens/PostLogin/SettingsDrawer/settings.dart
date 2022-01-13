@@ -1,11 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 class settingsPage extends StatefulWidget{
-
-  const settingsPage({Key? key}) : super(key:key);
+  UserInfo userData;
+  settingsPage({Key? key, required this.userData}) : super(key:key);
 
   @override
   State<settingsPage> createState() => _settingsPageState();
@@ -92,7 +91,7 @@ class _settingsPageState extends State<settingsPage> {
                           ),
                         )
                     ),
-                    Divider(color: Color(0X80000000)),
+                    Divider(color: Colors.black),
                     Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                         child: TextFormField(
@@ -113,7 +112,38 @@ class _settingsPageState extends State<settingsPage> {
                     SizedBox(height: 15),
                     ElevatedButton(
                       onPressed: (){
-                        //code here
+                        //Check if current password equals to new password
+                        if(widget.userData.password != currentPasswordController.text.trim()){
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text('The entered \'Current Password\' is incorrect. Please try again.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ));
+                        }else{
+                          showDialog<String>(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Confirmation'),
+                            content: const Text('Are you sure that you want to change your password?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'No'),
+                                child: const Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'Yes'),
+                                child: const Text('Yes'),
+                              ),
+                            ],
+                          ));
+                        }
                       }
                       ,
                       child: Text('Confirm password change'),

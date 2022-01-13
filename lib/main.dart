@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ntmu/RestartWidget.dart';
 import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
 import 'Screens/login_home.dart';
 import 'Components/functs.dart';
@@ -7,11 +8,12 @@ import 'package:ntmu/Models/UserInfo.dart';
 // @dart=2.9
 
 void main() {
-  runApp(MyApp());
+  //runApp(MyApp());
+  runApp(RestartWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  LoggedUserInfo userData = new LoggedUserInfo();
+  UserInfo userData = new UserInfo();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

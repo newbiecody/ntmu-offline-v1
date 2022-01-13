@@ -1,15 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Models/UserInfo.dart';
+
+import 'editProfile.dart';
 
 class profilePage extends StatefulWidget{
-  const profilePage({Key? key}) : super(key:key);
+  UserInfo userData;
+  profilePage({Key? key, required this.userData}) : super(key:key);
 
   @override
   State<profilePage> createState() => _profilePageState();
 }
 
 class _profilePageState extends State<profilePage> {
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +65,7 @@ class _profilePageState extends State<profilePage> {
                           alignment: Alignment.centerLeft,
                         ),
                         Align(
-                          child: Text('John Doe',
+                          child: Text(widget.userData.name,
                             style: TextStyle(
                               color: Color(0X80000000)
                               )
@@ -97,7 +103,7 @@ class _profilePageState extends State<profilePage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Align(
-                                  child: Text('26',
+                                  child: Text((DateTime.now().year - widget.userData.birthday.year).toString(),
                                       style: TextStyle(
                                           color: Color(0X80000000)
                                       )
@@ -134,7 +140,7 @@ class _profilePageState extends State<profilePage> {
                             alignment: Alignment.centerLeft,
                           ),
                           Align(
-                            child: Text('Male',
+                            child: Text(widget.userData.gender,
                                 style: TextStyle(
                                     color: Color(0X80000000)
                                 )
@@ -172,7 +178,7 @@ class _profilePageState extends State<profilePage> {
                             alignment: Alignment.centerLeft,
                           ),
                           Align(
-                            child: Text('Christianity',
+                            child: Text(widget.userData.religion,
                                 style: TextStyle(
                                     color: Color(0X80000000)
                                 )
@@ -209,7 +215,7 @@ class _profilePageState extends State<profilePage> {
                           ),
                           SizedBox(height: 5),
                           Align(
-                            child: Text('Badminton, Bowling, Cheerleading, Music, Scuba Diving, Singing, Watching movies, Whale watching',
+                            child: Text(widget.userData.hobbies.join(', '),
                                 style: TextStyle(
                                     color: Color(0X80000000),
                                     fontStyle: FontStyle.italic
@@ -248,7 +254,7 @@ class _profilePageState extends State<profilePage> {
                           ),
                           SizedBox(height: 5),
                           Align(
-                            child: Text('Funny open minded and optimistic guy who is into sports and recently into Scuba diving. I’m a Capricorn:) ESFJ-S. I may not look like one but I’m Chinese mixed Korean who is born and bred in Singapore :)',
+                            child: Text(widget.userData.profile_desc,
                                 style: TextStyle(
                                     color: Color(0X80000000),
                                     fontStyle: FontStyle.italic
@@ -270,7 +276,7 @@ class _profilePageState extends State<profilePage> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: (){
-              editProfile(context);
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage(userData: widget.userData,))));
             },
             child: Icon(Icons.edit)
       )

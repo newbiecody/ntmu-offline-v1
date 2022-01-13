@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_email extends StatelessWidget{
 
-  LoggedUserInfo creationData = new LoggedUserInfo();
+  UserInfo creationData = new UserInfo();
   //create_account_email({Key? key, required this.creationData}) : super(key: key);
   final emailInputController = TextEditingController();
   @override
@@ -33,7 +33,7 @@ class create_account_email extends StatelessWidget{
                 child: TextFormField(
                   controller: emailInputController,
                   autovalidateMode: AutovalidateMode.always,
-                  validator: (value) => EmailValidator.validate(value) ? null : 'Please enter a valid email.',
+                  validator: (value) => EmailValidator.validate(value!) ? null : 'Please enter a valid email.',
                   maxLength: 50,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15),

@@ -4,7 +4,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 
 class recommendationPage extends StatefulWidget{
-  LoggedUserInfo userData;
+  UserInfo userData;
   recommendationPage({Key? key, required this.userData}) : super(key:key);
 
   @override

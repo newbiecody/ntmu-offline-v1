@@ -1,21 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_password.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_name.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_birthday.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_profileDesc.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editPreferences.dart';
-
-import 'package:ntmu/Screens/PostLogin/SettingsDrawer/profile.dart';
-import 'package:ntmu/Screens/PostLogin/SettingsDrawer/settings.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/preferences.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/feedback.dart';
-import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editProfile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 MaterialColor CreateMaterialColor(Color color) {
@@ -40,8 +29,20 @@ MaterialColor CreateMaterialColor(Color color) {
   return MaterialColor(color.value, swatch);
 }
 
-void authenticateUser(){
+void authenticateUser(String username, String password, int flag){
   //authenticateUser code here
+  //if flag == 0: After account creation
+  //if flag == 1: Sign in with existing account
+  saveLoginInfo(String userName, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', userName);
+    prefs.setString('password', password);
+  }
+  //retrieve username and password, check if valid
+  saveLoginInfo(username, password);
+}
+
+void clearSharedPreferences(){
 
 }
 
@@ -77,13 +78,13 @@ void addHobbies(BuildContext context){
 
 
 
-void drawerProfile(BuildContext context){
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage())));
-}
+// void drawerProfile(BuildContext context){
+//   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage())));
+// }
 
-void settingsProfile(BuildContext context){
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage())));
-}
+// void settingsProfile(BuildContext context){
+//   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage())));
+// }
 
 void preferencesProfile(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(preferencePage())));
@@ -93,9 +94,9 @@ void feedbackProfile(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(feedbackPage())));
 }
 
-void editProfile(BuildContext context){
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage())));
-}
+// void editProfile(BuildContext context){
+//   Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage())));
+// }
 
 void editPreferences(BuildContext context){
   Navigator.of(context).push(MaterialPageRoute(builder: (context) => (editPreferencePage())));
@@ -199,89 +200,7 @@ Future<List<String>> readByLine_txt(String path) async {
   return list_readItemsByLine;
 }
 
-final list_allCourses = [
-'Accountancy',
-'Accountancy (GA)',
-'Accountancy (GB)',
-'Accountancy And Business',
-'Aerospace Engineering',
-'Aerospace Engineering And Economics',
-'Art, Design & Media',
-'Art, Design & Media (ADM)',
-'Art, Design & Media (ANIM)',
-'Art, Design & Media (DA)',
-'Art, Design & Media (DIPH)',
-'Art, Design & Media (FILM)',
-'Art, Design & Media (INME)',
-'Art, Design & Media (MA)',
-'Art, Design & Media (PROD)',
-'Art, Design & Media (VISC)',
-'Bioengineering',
-'Bioengineering And Economics',
-'Biological Sciences',
-'Biological Sciences And Psychology',
-'Biomedical Sciences',
-'Biomedical Sciences And Biobusiness',
-'Business',
-'Business And Computer Engineering',
-'Business And Computing',
-'Chemical & Biomolecular Engineering',
-'Chemical & Biomolecular Engineering And Economics',
-'Chemistry and Biological Chemistry',
-'Chinese',
-'Civil Engineering',
-'Civil Engineering And Economics',
-'Communication Studies',
-'Computer Engineering',
-'Computer Engineering And Economics',
-'Computer Science',
-'Computer Science And Economics',
-'Data Science And Artificial Intelligence',
-'Economics',
-'Economics And Media Analytics',
-'Economics And Psychology',
-'Economics And Public Policy & Global Affairs',
-'Electrical & Electronic Engineering',
-'Electrical & Electronic Engineering And Economics',
-'Engineering',
-'Engineering (CEE)',
-'Engineering (EEE)',
-'Engineering (ENE)',
-'Engineering (ME)',
-'English',
-'English Literature And Art History',
-'Environmental Earth Systems Science',
-'Environmental Earth Systems Science And Public Policy & Global Affairs',
-'Environmental Engineering',
-'Environmental Engineering And Economics',
-'History',
-'Humanities',
-'Information Engineering & Media',
-'Information Engineering & Media And Economics',
-'Linguistics & Multilingual Studies',
-'Maritime Studies',
-'Maritime Studies (ITG)',
-'Maritime Studies (MSB)',
-'Materials Engineering',
-'Materials Engineering And Economics',
-'Mathematical And Computer Sciences',
-'Mathematical Sciences',
-'Mathematical Sciences And Economics',
-'Mathematics & Economics',
-'Mechanical Engineering',
-'Mechanical Engineering And Economics',
-'Philosophy',
-'Physical and Mathematical Sciences',
-'Physics and Applied Physics',
-'Psychology',
-'Psychology And Linguistics & Multilingual Studies',
-'Psychology And Media Analytics',
-'Public Policy And Global Affairs',
-'Renaissance Engineering',
-'Social Sciences',
-'Sociology',
-'Sport Science & Management',
-];
+
 
 generateTags(List list_of_tags){
   List <Widget> list_of_tags_widget = [];//[SizedBox(width: 16)];
@@ -294,7 +213,11 @@ generateTags(List list_of_tags){
                 color: Color(0XFF99DDC8),
                 borderRadius: BorderRadius.circular(10)
             ),
-            child: Text(element),
+            child: Text(element,
+              style: TextStyle(
+                fontSize: 12
+              ),
+            ),
           )
       );
     });
@@ -307,3 +230,87 @@ retrieveComments(String postID){
   //fake comment generation
 
 }
+
+final list_allCourses = [
+  'Accountancy',
+  'Accountancy (GA)',
+  'Accountancy (GB)',
+  'Accountancy And Business',
+  'Aerospace Engineering',
+  'Aerospace Engineering And Economics',
+  'Art, Design & Media',
+  'Art, Design & Media (ADM)',
+  'Art, Design & Media (ANIM)',
+  'Art, Design & Media (DA)',
+  'Art, Design & Media (DIPH)',
+  'Art, Design & Media (FILM)',
+  'Art, Design & Media (INME)',
+  'Art, Design & Media (MA)',
+  'Art, Design & Media (PROD)',
+  'Art, Design & Media (VISC)',
+  'Bioengineering',
+  'Bioengineering And Economics',
+  'Biological Sciences',
+  'Biological Sciences And Psychology',
+  'Biomedical Sciences',
+  'Biomedical Sciences And Biobusiness',
+  'Business',
+  'Business And Computer Engineering',
+  'Business And Computing',
+  'Chemical & Biomolecular Engineering',
+  'Chemical & Biomolecular Engineering And Economics',
+  'Chemistry and Biological Chemistry',
+  'Chinese',
+  'Civil Engineering',
+  'Civil Engineering And Economics',
+  'Communication Studies',
+  'Computer Engineering',
+  'Computer Engineering And Economics',
+  'Computer Science',
+  'Computer Science And Economics',
+  'Data Science And Artificial Intelligence',
+  'Economics',
+  'Economics And Media Analytics',
+  'Economics And Psychology',
+  'Economics And Public Policy & Global Affairs',
+  'Electrical & Electronic Engineering',
+  'Electrical & Electronic Engineering And Economics',
+  'Engineering',
+  'Engineering (CEE)',
+  'Engineering (EEE)',
+  'Engineering (ENE)',
+  'Engineering (ME)',
+  'English',
+  'English Literature And Art History',
+  'Environmental Earth Systems Science',
+  'Environmental Earth Systems Science And Public Policy & Global Affairs',
+  'Environmental Engineering',
+  'Environmental Engineering And Economics',
+  'History',
+  'Humanities',
+  'Information Engineering & Media',
+  'Information Engineering & Media And Economics',
+  'Linguistics & Multilingual Studies',
+  'Maritime Studies',
+  'Maritime Studies (ITG)',
+  'Maritime Studies (MSB)',
+  'Materials Engineering',
+  'Materials Engineering And Economics',
+  'Mathematical And Computer Sciences',
+  'Mathematical Sciences',
+  'Mathematical Sciences And Economics',
+  'Mathematics & Economics',
+  'Mechanical Engineering',
+  'Mechanical Engineering And Economics',
+  'Philosophy',
+  'Physical and Mathematical Sciences',
+  'Physics and Applied Physics',
+  'Psychology',
+  'Psychology And Linguistics & Multilingual Studies',
+  'Psychology And Media Analytics',
+  'Public Policy And Global Affairs',
+  'Renaissance Engineering',
+  'Social Sciences',
+  'Sociology',
+  'Sport Science & Management',
+];

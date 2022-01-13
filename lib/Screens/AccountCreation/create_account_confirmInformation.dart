@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_confirmation extends StatelessWidget{
 
-  LoggedUserInfo creationData;
+  UserInfo creationData;
   create_account_confirmation({Key? key, required this.creationData}) : super(key: key);
 
   final DateFormat formatter = DateFormat('d MMMM y');
@@ -187,7 +187,7 @@ class create_account_confirmation extends StatelessWidget{
                         children: [
                           ElevatedButton(
                               onPressed: (){
-                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => baseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
+                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
                               },
                               child: Text(
                                   'Confirm'

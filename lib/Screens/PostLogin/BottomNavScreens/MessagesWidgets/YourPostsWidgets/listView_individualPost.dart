@@ -4,7 +4,8 @@ import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/openForumTh
 
 class individualPostWidget extends StatefulWidget{
   ForumPostHeaderInfo postHeaderInfo;
-  individualPostWidget({Key? key, required this.postHeaderInfo});
+  String username;
+  individualPostWidget({Key? key, required this.postHeaderInfo, required this.username});
 
   @override
   State<individualPostWidget> createState() => individualPostWidgetState();
@@ -34,10 +35,10 @@ class individualPostWidgetState extends State<individualPostWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(OpenForumThread(individualPost : widget.postHeaderInfo))));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(OpenForumThread(individualPost : widget.postHeaderInfo, username: widget.username,))));
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: EdgeInsets.symmetric(vertical: 15),
         child: Container(
           width: MediaQuery.of(context).size.width * 0.8,
           padding: EdgeInsets.all(10),

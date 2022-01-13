@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_study extends StatelessWidget{
 
-  LoggedUserInfo creationData;
+  UserInfo creationData;
   create_account_study({Key? key, required this.creationData}) : super(key: key);
   var yearFormData = 1;
   var courseFormData = 'Accountancy';

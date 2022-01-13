@@ -6,7 +6,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 class create_account_profileDesc extends StatelessWidget{
 
   final description = new TextEditingController();
-  LoggedUserInfo creationData;
+  UserInfo creationData;
   create_account_profileDesc({Key? key, required this.creationData}) : super(key: key);
 
   @override

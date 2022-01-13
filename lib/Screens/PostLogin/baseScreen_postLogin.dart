@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/RestartWidget.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/newPost.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/matches.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/forum.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/forum.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
-class baseScreen_postLogin extends StatefulWidget{
-  LoggedUserInfo userData;
-  baseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
+import 'SettingsDrawer/profile.dart';
+import 'SettingsDrawer/settings.dart';
+
+class BaseScreen_postLogin extends StatefulWidget{
+  UserInfo userData;
+  BaseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
 
   @override
-  State<baseScreen_postLogin> createState() => _baseScreen_postLoginState();
+  State<BaseScreen_postLogin> createState() => BaseScreen_postLoginState();
 }
 
-class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
+class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
 /*
   late dataPacket userData;
   _baseScreen_postLoginState(dataPacket userData){
@@ -21,14 +26,15 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
   }
 */
 
-  int _selectedIndex = 0;
+
+  static int _selectedIndex = 0;
 
   void _onItemTapped(int index){
     setState(() {
       _selectedIndex = index;
     });
   }
-  generateMainPage(LoggedUserInfo userData){
+  generateMainPage(UserInfo userData){
     List<Widget> _widgetOptions = [
       recommendationPage(userData: userData),
       forumPage(userData: userData),
@@ -45,7 +51,9 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
       floatingActionButton: Visibility(
         visible: _selectedIndex == 1 ? true : false,
         child: FloatingActionButton(
-          onPressed: (){},
+          onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(NewPost(userData: widget.userData))));
+          },
           child: const Icon(
             Icons.post_add_rounded
           )
@@ -81,14 +89,14 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
                     SizedBox(
                       height: 15,
                     ),
-                    Text('John Doe',
+                    Text(widget.userData.name,
                       style: TextStyle(
                           fontSize: 12,
                           color: Colors.white
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text('Insert email here',
+                    Text(widget.userData.email,
                       style: TextStyle(
                           fontSize: 12,
                           color: Colors.white
@@ -102,7 +110,7 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
                 height: 45,
                 child: GestureDetector(
                     onTap: (){
-                        drawerProfile(context);
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage(userData: widget.userData))));;
                       },
                       child: Row(
                         children: <Widget>[
@@ -119,7 +127,7 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
                         height: 45,
                         child: GestureDetector(
                           onTap: (){
-                            settingsProfile(context);
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage(userData: widget.userData))));
                           },
                         child: Row(
                         children: <Widget>[
@@ -163,6 +171,42 @@ class _baseScreen_postLoginState extends State<baseScreen_postLogin>{
                         Expanded(child: Text('Feedback',
                             style: TextStyle(fontSize: 16)),
                         flex: 3),
+                      ],
+                    )
+                ),
+              ),
+              Container(
+                height: 45,
+                child: GestureDetector(
+                    onTap: (){
+                      //head to Login page
+                      showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Log out'),
+                            content: const Text('Are you sure you want to log out?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: (){
+
+                                  RestartWidget.restartApp(context);
+                                },
+                                child: const Text('Yes'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'No'),
+                                child: const Text('No'),
+                              ),
+                            ],
+                          ));
+                    },
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(child: Icon(Icons.logout),
+                            flex: 1),
+                        Expanded(child: Text('Log out',
+                            style: TextStyle(fontSize: 16)),
+                            flex: 3),
                       ],
                     )
                 ),

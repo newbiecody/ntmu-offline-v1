@@ -5,14 +5,14 @@ import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWid
 
 import 'dart:math';
 
-class individualChatWidget extends StatefulWidget{
+class IndividualChatWidget extends StatefulWidget{
   ChatUser individualChat;
-  individualChatWidget({Key? key, required this.individualChat});
+  IndividualChatWidget({Key? key, required this.individualChat});
   @override
-  State<individualChatWidget> createState() => individualChatWidgetState();
+  State<IndividualChatWidget> createState() => IndividualChatWidgetState();
 }
 
-class individualChatWidgetState extends State<individualChatWidget> {
+class IndividualChatWidgetState extends State<IndividualChatWidget> {
 
   static bool _imageError = false;
   

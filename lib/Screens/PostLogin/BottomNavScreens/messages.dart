@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/announcements.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/chats.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/notifications.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/Notifications/notifications.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/yourposts.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class messagesPage extends StatefulWidget{
-  LoggedUserInfo userData;
+  UserInfo userData;
   messagesPage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -22,10 +22,10 @@ class messagesPageState extends State<messagesPage>{
   static bool _isPanelOpenNow = false;
   generateSubscreenMessages(userClickOption,sc, bool isPanelOpenNow) {
     List <Widget> messagesSubScreens = [
-      notifications(isPanelOpenNow: isPanelOpenNow),
+      notifications(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name),
       announcements(isPanelOpenNow: isPanelOpenNow),
       chats(isPanelOpenNow: isPanelOpenNow),
-      yourPosts(isPanelOpenNow: isPanelOpenNow)
+      yourPosts(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name)
     ];
     return messagesSubScreens[userClickOption];
   }

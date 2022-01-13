@@ -4,7 +4,7 @@ import 'package:ntmu/Screens/AccountCreation/create_account_confirmInformation.d
 import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_hobbies extends StatefulWidget{
-  LoggedUserInfo creationData;
+  UserInfo creationData;
   create_account_hobbies({Key? key, required this.creationData}) : super(key:key);
   @override
   State<create_account_hobbies> createState() => create_account_hobbies_State();

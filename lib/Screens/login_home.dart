@@ -4,9 +4,13 @@ import '../Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
+import 'PostLogin/baseScreen_postLogin.dart';
+
 class loginScreen extends StatelessWidget{
 
-  LoggedUserInfo creationData = new LoggedUserInfo();
+  UserInfo creationData = new UserInfo();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context){
@@ -50,6 +54,7 @@ class loginScreen extends StatelessWidget{
                       //margin: EdgeInsets.all(0),
                       padding: EdgeInsets.symmetric(horizontal: 100),
                       child: TextField(
+                        controller: usernameController,
                         maxLength: 25,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 15),
@@ -75,6 +80,7 @@ class loginScreen extends StatelessWidget{
                       //margin: EdgeInsets.all()
                       padding: EdgeInsets.symmetric(horizontal: 100),
                       child: TextField(
+                        controller: passwordController,
                         maxLength: 50,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(horizontal: 15),
@@ -96,8 +102,8 @@ class loginScreen extends StatelessWidget{
                     SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: (){
-                        authenticateUser();
-
+                        authenticateUser(usernameController.text, passwordController.text, 1);
+                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
                       },
                       child: Text('Sign in'),
                       style:

@@ -95,7 +95,7 @@ class openChatPageState extends State<openChatPage> {
               children: <Widget>[
                 Expanded(
                     child: SingleChildScrollView(
-                      child: ChatMessagesArea(ChatMessages: chatHistory))),
+                      child: ChatMessagesArea(chatMessages: chatHistory))),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

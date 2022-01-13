@@ -12,12 +12,37 @@ class CommentSection extends StatefulWidget{
 
 class CommentSectionsState extends State<CommentSection> {
 
+  generateComments(comments){
+    List <Widget> commentSection = [];
+    comments.forEach((commentObject){
+
+      commentSection.add(
+          Text(commentObject.comment,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold
+          )
+          )
+      );
+      commentSection.add(
+          Text(commentObject.commentingUser.fullName,
+              style: TextStyle(
+                  fontSize: 12
+              )
+          )
+      );
+      commentSection.add(
+        SizedBox(height: 16)
+      );
+    });
+    return commentSection;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-
-      ],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: generateComments(widget.individualPost.comments),
     );
 
   }

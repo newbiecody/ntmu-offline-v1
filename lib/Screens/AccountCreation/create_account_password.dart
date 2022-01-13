@@ -5,7 +5,7 @@ import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_password extends StatelessWidget{
 
-  LoggedUserInfo creationData = new LoggedUserInfo();
+  UserInfo creationData = new UserInfo();
   String email;
   final passwordController_one = TextEditingController();
   final passwordController_two = TextEditingController();

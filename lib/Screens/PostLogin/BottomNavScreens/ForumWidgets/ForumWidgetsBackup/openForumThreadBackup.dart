@@ -3,8 +3,6 @@ import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/MenuItem.dart';
 import 'package:ntmu/Models/UserInfo.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/editPost.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/newPost.dart';
 import 'package:ntmu/Screens/PostLogin/CommentSection.dart';
 
 class OpenForumThread extends StatefulWidget{
@@ -18,23 +16,47 @@ class OpenForumThread extends StatefulWidget{
 class OpenForumThreadState extends State<OpenForumThread> {
 
   final commentController = new TextEditingController();
-  //var _selectedItem = null;
+
   setPopupMenuOptions(String username, ForumPostHeaderInfo postInfo){
-    List popupMenuActions = [];
+    List<PopupMenuItem> popupMenuItems = [];
+    // List<MenuItem> MenuItems = [
+    //   MenuItem(menuItem_icon: Icon(Icons.flag_rounded), menuItem_name: 'Flag post'),
+    //   MenuItem(menuItem_icon: Icon(Icons.share_outlined), menuItem_name: 'Share'),
+    //
+    // ];
     if(username != postInfo.originalPoster){
       setState(() {
-        popupMenuActions = ['Flag'];
+        popupMenuItems = [
+          //MenuItem(menuItem_icon: Icon(Icons.flag_rounded), menuItem_name: 'Flag post'),
+          //MenuItem(menuItem_icon: Icon(Icons.share_outlined), menuItem_name: 'Share'),
+          PopupMenuItem<MenuItem>(child: Text('Flag post'), value: 0),
+        ];
       });
       //static const List<MenuItem> MenuItems = [
       //do nothing
     }
     else{
       setState(() {
-        popupMenuActions = ['Flag', 'Edit', 'Delete'];
+        popupMenuItems = [
+          // MenuItem(menuItem_icon: Icon(Icons.flag_rounded), menuItem_name: 'Flag post'),
+          // MenuItem(menuItem_icon: Icon(Icons.share_outlined), menuItem_name: 'Share'),
+          // MenuItem(menuItem_icon: Icon(Icons.edit), menuItem_name: 'Edit post'),
+          // MenuItem(menuItem_icon: Icon(Icons.delete), menuItem_name: 'Delete post')
+          PopupMenuItem(child: Text('Flag post'), value: 0),
+          PopupMenuItem(child: Text('Edit post'), value: 1),
+          PopupMenuItem(child: Text('Delete post'), value: 2)
+        ];
       });
     }
-    return popupMenuActions;
+    return popupMenuItems;
   }
+
+  // static const List<MenuItem> MenuItems = [
+  //   MenuItem(menuItem_icon: Icon(Icons.flag_rounded), menuItem_name: 'Flag post'),
+  //   MenuItem(menuItem_icon: Icon(Icons.share_outlined), menuItem_name: 'Share'),
+  //   MenuItem(menuItem_icon: Icon(Icons.edit), menuItem_name: 'Edit post'),
+  //   MenuItem(menuItem_icon: Icon(Icons.delete), menuItem_name: 'Delete post'),
+  // ];
 
 
   PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem(
@@ -62,44 +84,20 @@ class OpenForumThreadState extends State<OpenForumThread> {
         title: Text('Nice to Meet You'),
         centerTitle: true,
         actions: [
-          PopupMenuButton(itemBuilder: (BuildContext context){
-            return setPopupMenuOptions(widget.username, widget.individualPost).map<PopupMenuEntry>((menuitem) => PopupMenuItem(
-                child: Text(menuitem),
-                value: menuitem
-              )
-            ).toList();
-          },
-        onSelected: (menuitem){
-            print(menuitem);
-            setState(() {
-              if(menuitem == 'Flag'){
-
-              }else if(menuitem == 'Edit'){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(EditPost(postInfo: widget.individualPost))));
-              }else if(menuitem == 'Delete'){
-                showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Delete post'),
-                      content: const Text('Are you sure you want to delete your post? This action is irreversible.'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: (){
-                            Navigator.pop(context);
-                            //Delete from database
-                          },
-                          child: const Text('Yes'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'No'),
-                          child: const Text('No'),
-                        ),
-                      ],
-                    ));
-              };
-
-            });
-        },
+          PopupMenuButton<MenuItem>(
+            onSelected: (popupMenuSelection){
+              if(popupMenuSelection == 1){
+                print('flag');
+              }else if(popupMenuSelection == 2){
+                print('edit');
+              }else if(popupMenuSelection == 3){
+                print('delete');
+              }
+            },
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItem>>[setPopupMenuOptions(widget.username, widget.individualPost)]
+              //itemBuilder: (context) => [...setPopupMenuOptions(widget.username, widget.individualPost).map(buildItem).toList()]
+              //[...setPopupMenuOptions(widget.username, widget.individualPost).map(buildItem).toList()]
+              //[...MenuItems.map(buildItem).toList()]
           )
         ]
 

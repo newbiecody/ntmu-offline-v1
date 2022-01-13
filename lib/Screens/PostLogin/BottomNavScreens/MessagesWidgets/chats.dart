@@ -37,7 +37,7 @@ class chatsState extends State<chats>{
 
     chatList.add(SizedBox(height: 25));
     chats.forEach((chat) {
-      chatList.add(individualChatWidget(individualChat: chat)
+      chatList.add(IndividualChatWidget(individualChat: chat)
       );
     });
     chatList.add(SizedBox(height: 200));
