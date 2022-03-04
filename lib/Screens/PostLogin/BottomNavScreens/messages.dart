@@ -6,8 +6,10 @@ import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/yourpost
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../Models/UserInfo_secure.dart';
+
 class messagesPage extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   messagesPage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -22,10 +24,10 @@ class messagesPageState extends State<messagesPage>{
   static bool _isPanelOpenNow = false;
   generateSubscreenMessages(userClickOption,sc, bool isPanelOpenNow) {
     List <Widget> messagesSubScreens = [
-      notifications(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name),
+      notifications(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name!),
       announcements(isPanelOpenNow: isPanelOpenNow),
       chats(isPanelOpenNow: isPanelOpenNow),
-      yourPosts(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name)
+      yourPosts(isPanelOpenNow: isPanelOpenNow, username: widget.userData.name!)
     ];
     return messagesSubScreens[userClickOption];
   }

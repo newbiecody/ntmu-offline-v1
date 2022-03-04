@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Screens/PostLogin/baseScreen_postLogin.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+import 'dart:io';
+
+import '../../Models/UserInfo.dart';
+import '../../api_functions/createAccount.dart';
 
 class create_account_confirmation extends StatelessWidget{
 
@@ -23,6 +26,19 @@ class create_account_confirmation extends StatelessWidget{
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(20),
+                            color: Colors.black,
+                            image: DecorationImage(
+                                fit: BoxFit.contain,
+                                image: (UserInfoStatic.profilePicture is File) ? FileImage(UserInfoStatic.profilePicture) : UserInfoStatic.profilePicture,// (creationData.profilePicture != null) ? creationData.profilePicture: AssetImage("images/blank-profile-picture-973460.png"),
+                            )
+                        ),
+                      ),
+                      SizedBox(height: 15),
                       Text('Please check that the information that you have entered is correct!',
                         style: TextStyle(
                             fontSize: 20
@@ -45,6 +61,26 @@ class create_account_confirmation extends StatelessWidget{
                               ),
                             ),
                             Text('${creationData.name}'.trim())
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 25),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0X8099DDC8),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Username',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16
+                              ),
+                            ),
+                            Text('${creationData.username}'.trim())
                           ],
                         ),
                       ),
@@ -98,6 +134,66 @@ class create_account_confirmation extends StatelessWidget{
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Text('Religion',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text(creationData.religion)
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0X8099DDC8),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Country',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text(creationData.country_of_origin)
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0X8099DDC8),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Gender',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text('${creationData.gender}')
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0X8099DDC8),
+                            borderRadius: BorderRadius.circular(10)
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                             Text('Course',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -124,7 +220,7 @@ class create_account_confirmation extends StatelessWidget{
                                 fontWeight: FontWeight.bold
                               ),
                             ),
-                            Text('${creationData.year}')
+                            Text('${creationData.year_of_matriculation}')
                           ],
                         ),
                       ),
@@ -186,8 +282,14 @@ class create_account_confirmation extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(
-                              onPressed: (){
-                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
+                              onPressed: () {
+                                // Send creationData to server
+                                Future.wait([createAccountAPI(context, creationData)]);
+                                print("lOl");
+                                // UserInfoStatic.profilePictureBase64String =
+                                // createAccountAPI(context, creationData);
+                                // Temp
+                                // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
                               },
                               child: Text(
                                   'Confirm'

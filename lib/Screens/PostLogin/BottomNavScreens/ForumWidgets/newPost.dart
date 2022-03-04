@@ -4,9 +4,10 @@ import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/postPreview.dart';
 
 import '../../../../Models/UserInfo.dart';
+import '../../../../Models/UserInfo_secure.dart';
 
 class NewPost extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   NewPost({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -19,7 +20,7 @@ class NewPostState extends State<NewPost> {
   final mainContentFieldController = TextEditingController();
   final tagsFieldController = TextEditingController();
 
-  generatePostDataPacket(String title, String mainContent, String tags, UserInfo userinfo){
+  generatePostDataPacket(String title, String mainContent, String tags, UserInfoFlexi_noPassword userinfo){
 
     List <String> preprocessedTagsList = tags.split(',');
     List <String> processedTagsList = [];
@@ -30,7 +31,7 @@ class NewPostState extends State<NewPost> {
     return ForumPostHeaderInfo(
         headerContent: title,
         mainContent: mainContent,
-        originalPoster: userinfo.name,
+        originalPoster: userinfo.name!,
         timeOfPost: DateTime.now(),
         comments: [],
         likedBy: [],

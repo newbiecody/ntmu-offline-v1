@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:ntmu/Models/UserModel.dart';
+import 'package:ntmu/Screens/PostLogin/preLoginLoadingPage.dart';
+import 'package:ntmu/api_functions/apiMessageDialog.dart';
+import 'package:ntmu/api_functions/callLogin.dart';
 import '../Components/functs.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_email.dart';
 import 'package:ntmu/Models/UserInfo.dart';
@@ -42,6 +46,7 @@ class loginScreen extends StatelessWidget{
                         SizedBox(width: 100),
                         Text(
                           'Username',
+                          // 'Email',
                           //textAlign: TextAlign.left,
                           style: TextStyle(
                             color: Color(0XFF495057),
@@ -101,9 +106,13 @@ class loginScreen extends StatelessWidget{
                     ),
                     SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: (){
-                        authenticateUser(usernameController.text, passwordController.text, 1);
-                        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
+                      onPressed: ()async{
+                        await login(context, usernameController.text, passwordController.text);
+                        // requestLoginToken(usernameController.text, passwordController.text);
+
+                        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: )), (route) => false);
+
+                        // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
                       },
                       child: Text('Sign in'),
                       style:

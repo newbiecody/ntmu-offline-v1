@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Components/functs.dart';
 import 'package:intl/intl.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_study.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+
+import 'create_account_religion.dart';
 
 class create_account_birthday extends StatelessWidget{
 
-  UserInfo creationData = new UserInfo();
+  // UserInfo creationData = new UserInfo();
+  UserInfo creationData;
   DateTime _selectedDate = DateTime.now();
   create_account_birthday({Key? key, required this.creationData}) : super(key: key);
 
@@ -61,7 +62,7 @@ class create_account_birthday extends StatelessWidget{
                           );
                         }else{
                           creationData.birthday = _selectedDate;
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_study(creationData: creationData))));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_religion(creationData: creationData))));
                         }
                         },
                       child: Text(

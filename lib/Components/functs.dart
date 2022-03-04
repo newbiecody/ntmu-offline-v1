@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ntmu/Models/UserInfo.dart';
 
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/editPreferences.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/preferences.dart';
@@ -33,13 +38,7 @@ void authenticateUser(String username, String password, int flag){
   //authenticateUser code here
   //if flag == 0: After account creation
   //if flag == 1: Sign in with existing account
-  saveLoginInfo(String userName, String password) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', userName);
-    prefs.setString('password', password);
-  }
-  //retrieve username and password, check if valid
-  saveLoginInfo(username, password);
+
 }
 
 void clearSharedPreferences(){
@@ -231,6 +230,7 @@ retrieveComments(String postID){
 
 }
 
+
 final list_allCourses = [
   'Accountancy',
   'Accountancy (GA)',
@@ -314,3 +314,36 @@ final list_allCourses = [
   'Sociology',
   'Sport Science & Management',
 ];
+
+convertAssetImageBase64() async {
+
+}
+
+class PopulateSignupFormData{
+  static var list_allCourses;
+  static var list_allCountries;
+  static var list_allMajorReligions;
+  static var list_allHobbies;
+
+  static var map_ReligionsWithID;
+  static var map_CountriesWithID;
+  static var map_HobbiesWithID;
+  static var map_CoursesWithID;
+
+  static var numOfHobbies = list_allHobbies.length;
+  static var numOfReligions = list_allMajorReligions.length;
+}
+
+
+createPath(String dir) async{
+  final path = Directory(dir);
+  if((await path.exists())){
+    print("Directory exists..");
+  }else{
+    print("Directory does not exist");
+    try{
+      path.create(recursive: true);
+    }catch(_){}
+
+  }
+}

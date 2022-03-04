@@ -6,10 +6,11 @@ import 'package:ntmu/Models/GeneralAccountInfo.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:ntmu/Models/CommentObject.dart';
 
+import '../../../../Models/UserInfo_secure.dart';
 import 'openForumThread.dart';
 
 class forumPage extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   forumPage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -73,7 +74,7 @@ class forumPageState extends State<forumPage>{
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(OpenForumThread(individualPost: forumPagePosts[index], username: widget.userData.name,))));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(OpenForumThread(individualPost: forumPagePosts[index], username: widget.userData.name!))));
                 },
                 child: Container(
                   child: Padding(

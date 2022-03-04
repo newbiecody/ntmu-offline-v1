@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
+import '../../../Models/UserInfo_secure.dart';
+
 
 class recommendationPage extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   recommendationPage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -71,7 +73,7 @@ class recommendationPageState extends State<recommendationPage>{
                             color: Color(0X80000000)
                         ),
                       ),
-                      Text(hobbiesString(widget.userData.hobbies),
+                      Text(hobbiesString(widget.userData.hobbies!),
                         style: TextStyle(
                           fontSize: 16
                         ),
@@ -123,7 +125,7 @@ class recommendationPageState extends State<recommendationPage>{
                           SizedBox(width: 100),
                           ElevatedButton(
                               onPressed: (){
-
+                                
                               },
                               child: Text(
                                   'Reject'

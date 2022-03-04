@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
+import '../../../Models/UserInfo_secure.dart';
 import 'editProfile.dart';
 
 class profilePage extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   profilePage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -65,7 +66,7 @@ class _profilePageState extends State<profilePage> {
                           alignment: Alignment.centerLeft,
                         ),
                         Align(
-                          child: Text(widget.userData.name,
+                          child: Text(widget.userData.name!,
                             style: TextStyle(
                               color: Color(0X80000000)
                               )
@@ -103,7 +104,7 @@ class _profilePageState extends State<profilePage> {
                                   alignment: Alignment.centerLeft,
                                 ),
                                 Align(
-                                  child: Text((DateTime.now().year - widget.userData.birthday.year).toString(),
+                                  child: Text((DateTime.now().year - widget.userData.birthday!.year).toString(),
                                       style: TextStyle(
                                           color: Color(0X80000000)
                                       )
@@ -140,7 +141,7 @@ class _profilePageState extends State<profilePage> {
                             alignment: Alignment.centerLeft,
                           ),
                           Align(
-                            child: Text(widget.userData.gender,
+                            child: Text(widget.userData.gender!,
                                 style: TextStyle(
                                     color: Color(0X80000000)
                                 )
@@ -178,7 +179,7 @@ class _profilePageState extends State<profilePage> {
                             alignment: Alignment.centerLeft,
                           ),
                           Align(
-                            child: Text(widget.userData.religion,
+                            child: Text(widget.userData.religion!,
                                 style: TextStyle(
                                     color: Color(0X80000000)
                                 )
@@ -215,7 +216,7 @@ class _profilePageState extends State<profilePage> {
                           ),
                           SizedBox(height: 5),
                           Align(
-                            child: Text(widget.userData.hobbies.join(', '),
+                            child: Text(widget.userData.hobbies!.join(', '),
                                 style: TextStyle(
                                     color: Color(0X80000000),
                                     fontStyle: FontStyle.italic
@@ -254,7 +255,7 @@ class _profilePageState extends State<profilePage> {
                           ),
                           SizedBox(height: 5),
                           Align(
-                            child: Text(widget.userData.profile_desc,
+                            child: Text(widget.userData.profile_desc!,
                                 style: TextStyle(
                                     color: Color(0X80000000),
                                     fontStyle: FontStyle.italic
@@ -276,7 +277,7 @@ class _profilePageState extends State<profilePage> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage(userData: widget.userData,))));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(editProfilePage(userData: widget.userData))));
             },
             child: Icon(Icons.edit)
       )

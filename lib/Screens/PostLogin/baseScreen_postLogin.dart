@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
+import 'package:ntmu/Models/UserInfo_secure.dart';
 import 'package:ntmu/RestartWidget.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/newPost.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/matches.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/forum.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+import 'package:ntmu/Screens/loadingScreen.dart';
 
 import 'SettingsDrawer/profile.dart';
 import 'SettingsDrawer/settings.dart';
 
 class BaseScreen_postLogin extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   BaseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -19,14 +21,8 @@ class BaseScreen_postLogin extends StatefulWidget{
 }
 
 class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
-/*
-  late dataPacket userData;
-  _baseScreen_postLoginState(dataPacket userData){
-    this.userData = userData;
-  }
-*/
 
-
+  Widget _body = LoadingScreen();
   static int _selectedIndex = 0;
 
   void _onItemTapped(int index){
@@ -34,7 +30,7 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
       _selectedIndex = index;
     });
   }
-  generateMainPage(UserInfo userData){
+  generateMainPage(UserInfoFlexi_noPassword userData){
     List<Widget> _widgetOptions = [
       recommendationPage(userData: userData),
       forumPage(userData: userData),
@@ -89,14 +85,14 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                     SizedBox(
                       height: 15,
                     ),
-                    Text(widget.userData.name,
+                    Text(widget.userData.name!,
                       style: TextStyle(
                           fontSize: 12,
                           color: Colors.white
                       ),
                     ),
                     SizedBox(height: 5),
-                    Text(widget.userData.email,
+                    Text(widget.userData.email!,
                       style: TextStyle(
                           fontSize: 12,
                           color: Colors.white
@@ -110,7 +106,7 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                 height: 45,
                 child: GestureDetector(
                     onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage(userData: widget.userData))));;
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(profilePage(userData: widget.userData))));
                       },
                       child: Row(
                         children: <Widget>[

@@ -11,12 +11,8 @@ class create_account_hobbies extends StatefulWidget{
 }
 
 class create_account_hobbies_State extends State<create_account_hobbies>{
-  var listOfHobbies = ['Travel', 'Gardening', 'Gaming', 'Golf', 'Swimming', 'Caring for animals', 'Learning languages', 'Working out', 'Eating', 'Shopping',
-    'Surfing', 'Cycling', 'Reading', 'Netflix', 'Drinking','Volunteering', 'Baking', ' Vlogging', 'Running', 'Filming','Hiking',
-    'Fashion', 'Outdoors', 'Yoga', 'Photography', 'Walking', 'Football', 'Writing' , 'Politics', 'Climbing', 'Museum hopping', 'Caring for the environment',
-    'Board Games', 'Art', 'E-sports', 'Dancing', 'Spirituality'];
-
-  final _selections = List<bool>.generate(37, (i) => false);
+  var listOfHobbies = PopulateSignupFormData.list_allHobbies;
+  final _selections = List<bool>.generate(PopulateSignupFormData.numOfHobbies, (i) => false);
   createOptionButtons(List hobbies){
     hobbies.sort();
     int indexNum = 0;

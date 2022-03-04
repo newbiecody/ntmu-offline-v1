@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Screens/AccountCreation/create_account_name.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+import 'create_account_username.dart';
 
 class create_account_password extends StatelessWidget{
 
@@ -99,7 +98,7 @@ class create_account_password extends StatelessWidget{
                       }else{
                           creationData.email = email;
                           creationData.password = passwordController_one.text;
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_name(creationData: creationData))));
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_username(creationData: creationData))));
                         }
                         },
                         child: Text(

@@ -38,7 +38,7 @@ class create_account_study extends StatelessWidget{
                   SizedBox(height:25),
                   ElevatedButton(
                       onPressed: (){
-                        creationData.year = yearFormData;
+                        creationData.year_of_matriculation = yearFormData;
                         creationData.course = courseFormData;
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_profileDesc(creationData: creationData,))));
                       },

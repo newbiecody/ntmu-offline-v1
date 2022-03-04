@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Screens/AccountCreation/create_account_password.dart';
-import 'package:ntmu/Components/functs.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
 class create_account_email extends StatelessWidget{
 
   UserInfo creationData = new UserInfo();
-  //create_account_email({Key? key, required this.creationData}) : super(key: key);
+
+  isOfficialEmail(String? email){
+    String officialEmailPattern = "ntu.edu.sg";
+    if(email != null){
+      return email.contains(new RegExp(officialEmailPattern, caseSensitive: false));
+    }
+  }
+
+  // create_account_email({Key? key, required this.creationData}) : super(key: key);
   final emailInputController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class create_account_email extends StatelessWidget{
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text('Hello there! Please provide us with \n your NTU email.',
+                child: Text('Hello there! Please provide us with \n your NTU email address.',
                 style: TextStyle(
                   fontSize: 20,
                   height: 1.5
@@ -33,7 +40,7 @@ class create_account_email extends StatelessWidget{
                 child: TextFormField(
                   controller: emailInputController,
                   autovalidateMode: AutovalidateMode.always,
-                  validator: (value) => EmailValidator.validate(value!) ? null : 'Please enter a valid email.',
+                  validator: (value) => isOfficialEmail(value!) ? null : 'Please enter an official NTU email address.',
                   maxLength: 50,
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15),

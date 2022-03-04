@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
+import '../../../Models/UserInfo_secure.dart';
+
 class editProfilePage extends StatefulWidget{
-  UserInfo userData;
+  UserInfoFlexi_noPassword userData;
   editProfilePage({Key? key, required this.userData}) : super(key:key);
 
   @override
@@ -74,7 +76,7 @@ class _editProfilePageState extends State<editProfilePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(widget.userData.name,
+                  child: Text(widget.userData.name!,
                     style: TextStyle(
                       color: Colors.grey
                     ),
@@ -113,7 +115,7 @@ class _editProfilePageState extends State<editProfilePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Text((DateTime.now().year - widget.userData.birthday.year).toString(),
+                    child: Text((DateTime.now().year - widget.userData.birthday!.year).toString(),
                       style: TextStyle(
                           color: Colors.grey
                       ),

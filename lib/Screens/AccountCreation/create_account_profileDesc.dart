@@ -1,16 +1,26 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
-import 'package:ntmu/Components/functs.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:ntmu/Screens/AccountCreation/create_account_hobbies.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+
+
 
 class create_account_profileDesc extends StatelessWidget{
 
   final description = new TextEditingController();
+  var profileImage;
+  var awaitingImageParent = true;
   UserInfo creationData;
   create_account_profileDesc({Key? key, required this.creationData}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return SafeArea(
       child: Scaffold(
           body: Center(
@@ -19,25 +29,18 @@ class create_account_profileDesc extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height:80),
-                    GestureDetector(
-                      onTap: ()=> {
-                        //uploadphoto
-                      },
-                      child: CircleAvatar(
-                        radius: 150,
-                        backgroundColor: Color(0X3399DDC8),
-                        child: Icon(
-                          Icons.add_a_photo_rounded,
-                          color: Color(0XFF99DDC8),
-                          size: 35
-                        ),
+                    SizedBox(height:40),
+                    Text('Select a profile picture!',
+                      style: TextStyle(
+                          fontSize: 20
                       ),
                     ),
+                    SelectProfileImageWidget(onImageChanged: (image) => {UserInfoStatic.profilePicture = image}, awaitingImage: awaitingImageParent),
                     Container(
                       padding: EdgeInsets.all(20),
                       child: Column(
                         children: [
+                          SizedBox(height:25),
                           Text('Add a description about yourself!',
                             style: TextStyle(
                               fontSize: 20
@@ -54,8 +57,7 @@ class create_account_profileDesc extends StatelessWidget{
                                 }else{
                                   return null;
                                 }
-                              }
-                              ,
+                              },
                               maxLines: 15,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
@@ -86,6 +88,7 @@ class create_account_profileDesc extends StatelessWidget{
                                 )
                             );
                           }else{
+                            convertToBase64Image();
                             creationData.profile_desc = description.text.trim();
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(create_account_hobbies(creationData: creationData))));
                           }
@@ -108,4 +111,63 @@ class create_account_profileDesc extends StatelessWidget{
     );
   }
 
+}
+
+class SelectProfileImageWidget extends StatefulWidget {
+  var onImageChanged;
+  var awaitingImage;
+  SelectProfileImageWidget({Key? key, required this.onImageChanged, required this.awaitingImage}) : super(key:key);
+
+  @override
+  SelectProfileImageWidgetState createState() => SelectProfileImageWidgetState();
+}
+
+class SelectProfileImageWidgetState extends State<SelectProfileImageWidget> {
+
+  late File _image;
+  final imagePicker = ImagePicker();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: () async {
+          final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
+          if(pickedFile != null){
+            setState(() {
+              _image = File(pickedFile.path);
+              widget.awaitingImage = false;
+              UserInfoStatic.profilePicture = _image;
+              convertToBase64Image();
+            });
+          }
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              color: Colors.black,
+              image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: (widget.awaitingImage ? AssetImage("images/blank-profile-picture-973460.png") : FileImage(UserInfoStatic.profilePicture)) as ImageProvider
+              )
+          ),
+        )
+    );
+
+  }
+}
+
+Future convertToBase64Image () async {
+  if(UserInfoStatic.profilePicture is AssetImage){
+
+    ByteData bytes = await rootBundle.load("images/blank-profile-picture-973460.png");
+    var buffer = bytes.buffer;
+    var base64ImageString = base64.encode(Uint8List.view(buffer));
+    UserInfoStatic.profilePictureBase64String = base64ImageString;
+  }else{
+
+    List <int> imageBytes = await UserInfoStatic.profilePicture.readAsBytesSync();
+    String base64ImageString = base64Encode(imageBytes);
+    UserInfoStatic.profilePictureBase64String = base64ImageString;
+  }
 }
