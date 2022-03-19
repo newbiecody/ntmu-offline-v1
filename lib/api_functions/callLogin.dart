@@ -92,8 +92,10 @@ Future <void> saveProfilePicture() async {
   String? url = await prefs.getString("ntmu_avatar_url");
 
   // Download image
-  final ByteData imageData = await NetworkAssetBundle(Uri.parse("http://10.0.2.2:8000" + url!)).load("");
-  final Uint8List bytes = imageData.buffer.asUint8List();
+  // final ByteData imageData = await NetworkAssetBundle(Uri.parse("http://10.0.2.2:8000" + url!)).load("");
+  // final Uint8List bytes = imageData.buffer.asUint8List();
+  final Uint8List bytes = await http.get(Uri.parse("http://10.0.2.2:8000" + url!)).then(
+          (value) => value.bodyBytes);
   final String base64Img = base64Encode(bytes);
   // Create imgData object
   final data = imgData(id: 0, data: base64Img);
@@ -110,6 +112,22 @@ Future <void> saveProfilePicture() async {
   // Insert data
   await insertImgData(data, database);
   print("Profile image saved!");
+}
+
+Future getProfileImageFromDB() async{
+  // Open database
+  String dbPath = await getDatabasesPath();
+  String path = join(dbPath, "db_ntmu");
+  await createPath(dbPath);
+  Database database = await openDatabase(path);
+  final imgs = await getImgData(database);
+  imgs.forEach((img){
+    if(img['id'] == 0){
+      print(img['data']);
+      return Image.memory(base64Decode(img['data']));
+    }
+  });
+  return null;
 }
 
 Future retrieveUserInfo() async{
@@ -142,6 +160,8 @@ login(BuildContext context, String username, String password) async{
     await requestLoginToken(username, password);
     await retrieveUserInfo(); // From server
     await saveProfilePicture();
+    var dp = await getProfileImageFromDB();
+
 
     List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear'];
     // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -150,10 +170,29 @@ login(BuildContext context, String username, String password) async{
     loginDataPacket.fromJson(userData);
 
 
-    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket)), (route) => false);
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp:dp)), (route) => false);
     }on Exception{
       showApiMessageDialog(context, "Error", "There was an error with sign in, please try again later.");
     }
 
 }
 
+loginWithToken(BuildContext context) async{
+
+  try{
+    await retrieveUserInfo(); // From server
+    await saveProfilePicture();
+    var dp = await getProfileImageFromDB();
+    List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear'];
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userData = await retrieveSharedPrefs_userInfo(list_dataToFetch);
+    var loginDataPacket = new UserInfoFlexi_noPassword();
+    loginDataPacket.fromJson(userData);
+
+
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp: dp)), (route) => false);
+  }on Exception{
+    showApiMessageDialog(context, "Error", "There was an error with sign in, please try again later.");
+  }
+
+}

@@ -8,13 +8,15 @@ import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/forum.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:ntmu/Screens/loadingScreen.dart';
+import 'package:ntmu/api_functions/callLogin.dart';
 
 import 'SettingsDrawer/profile.dart';
 import 'SettingsDrawer/settings.dart';
 
 class BaseScreen_postLogin extends StatefulWidget{
   UserInfoFlexi_noPassword userData;
-  BaseScreen_postLogin({Key? key, required this.userData}) : super(key:key);
+  Image dp;
+  BaseScreen_postLogin({Key? key, required this.userData, required this.dp}) : super(key:key);
 
   @override
   State<BaseScreen_postLogin> createState() => BaseScreen_postLoginState();
@@ -79,6 +81,8 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CircleAvatar(
+                      child: widget.dp,
+                      // backgroundImage: widget.dp,
                       maxRadius: 37.5,
                       backgroundColor: Color(0X3399DDC8),
                     ),

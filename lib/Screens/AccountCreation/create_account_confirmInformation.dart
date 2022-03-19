@@ -285,11 +285,6 @@ class create_account_confirmation extends StatelessWidget{
                               onPressed: () {
                                 // Send creationData to server
                                 Future.wait([createAccountAPI(context, creationData)]);
-                                print("lOl");
-                                // UserInfoStatic.profilePictureBase64String =
-                                // createAccountAPI(context, creationData);
-                                // Temp
-                                // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: creationData)), (Route<dynamic> route) => false);
                               },
                               child: Text(
                                   'Confirm'

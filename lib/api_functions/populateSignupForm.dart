@@ -53,7 +53,7 @@ Future populateSignupFormPagesAPI() async {
 
   }else{
     return null;
-    // showApiErrorDialog(context, "Login error", "There seems to be an error logging you in, please try again.");
+    // showApiMessageDialog(context, "Login error", "There seems to be an error logging you in, please try again.");
   }
 
 }

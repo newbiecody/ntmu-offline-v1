@@ -58,7 +58,8 @@ Future createAccountAPI(BuildContext context, UserInfo signupDataPacket) async {
 
   if(response.statusCode == 200){
     final responseJson = json.decode(response.body);
-    saveToken(responseJson["token"]);
+    await saveToken(responseJson["token"]);
+    await loginWithToken(context);
   }else{
     showApiMessageDialog(context, "Login error", "There seems to be an error logging you in, please try again.");
   }

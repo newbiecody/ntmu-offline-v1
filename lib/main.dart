@@ -10,13 +10,16 @@ import 'api_functions/populateSignupForm.dart';
 
 // @dart=2.9
 
-void main() {
+void main() async{
   //runApp(MyApp());
-  populateSignupFormPagesAPI();
-  runApp(RestartWidget(child: MyApp()));
+  var apiResponse = await populateSignupFormPagesAPI();
+  runApp(RestartWidget(child: MyApp(apiResponse)));
 }
 
 class MyApp extends StatelessWidget {
+  var populateFormsResponse;  //Test
+  MyApp(this.populateFormsResponse);  //Test
+
   UserInfo userData = new UserInfo();
   // This widget is the root of your application.
   @override

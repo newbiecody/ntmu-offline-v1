@@ -85,6 +85,7 @@ class loginScreen extends StatelessWidget{
                       //margin: EdgeInsets.all()
                       padding: EdgeInsets.symmetric(horizontal: 100),
                       child: TextField(
+                        obscureText: true,
                         controller: passwordController,
                         maxLength: 50,
                         decoration: InputDecoration(

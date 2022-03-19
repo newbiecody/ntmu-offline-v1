@@ -41,7 +41,7 @@ class recommendationPageState extends State<recommendationPage>{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Insert match names here',
+                      Text('Jeslyn',
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold
