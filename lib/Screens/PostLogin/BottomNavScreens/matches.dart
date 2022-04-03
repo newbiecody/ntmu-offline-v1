@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 
+import '../../../Components/chats_static_data.dart';
 import '../../../Models/UserInfo_secure.dart';
 
 
@@ -112,7 +113,7 @@ class recommendationPageState extends State<recommendationPage>{
                         children: <Widget>[
                           ElevatedButton(
                               onPressed: (){
-
+                                print(ChatData_static.message_threads);
                               },
                               child: Text(
                                   'Accept'

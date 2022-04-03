@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/ChatMessage.dart';
-import 'package:ntmu/Models/ChatUser.dart';
+import 'package:ntmu/Models/ChatThread.dart';
+
+import '../../../../../Components/chats_static_data.dart';
 
 class ChatMessagesArea extends StatefulWidget{
   List <ChatMessage> chatMessages;
@@ -26,14 +28,14 @@ class ChatMessagesAreaState extends State<ChatMessagesArea> {
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: Align(
-                alignment: widget.chatMessages[index].sender_or_receiver == "receiver" ? Alignment.centerLeft : Alignment.centerRight,
+                alignment: int.parse(widget.chatMessages[index].sender_id) == ChatData_static.user_id ? Alignment.centerLeft : Alignment.centerRight,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: widget.chatMessages[index].sender_or_receiver == "receiver" ? Colors.black12 : Color(0XFF99DDC8)
+                    color: int.parse(widget.chatMessages[index].sender_id) == ChatData_static.user_id ? Colors.black12 : Color(0XFF99DDC8)
                   ),
                   padding: EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
-                  child: Text(widget.chatMessages[index].message),
+                  child: Text(widget.chatMessages[index].content),
                 ),
               ),
             );

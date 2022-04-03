@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/ChatUser.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/listView_individualChat.dart';
+import 'package:ntmu/Models/ChatThread.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/IndividualChatWidget.dart';
+
+import '../../../../Components/chats_static_data.dart';
 
 class chats extends StatefulWidget{
-  //dataPacket userData;
-  //ScrollController sc;
-  //chats({Key? key, required this.userData}) : super(key:key);
-
   bool isPanelOpenNow;
   chats({Key? key, required this.isPanelOpenNow}) : super(key:key);
   @override
@@ -15,29 +13,18 @@ class chats extends StatefulWidget{
 }
 
 class chatsState extends State<chats>{
-   static List<ChatUser> chatUsers = [
-    ChatUser(name: 'Amarla', time: DateTime.parse("2021-07-20 20:18:04"), imageURL: 'images/forFlutterDP1.jpg', messageText: ['Hello1']),
-    ChatUser(name: 'John', time: DateTime.parse("2021-05-20 20:18:04"), imageURL: 'images/forFlutterDP2.jpg', messageText: ['Hello2']),
-    ChatUser(name: 'Raini', time: DateTime.parse("2021-06-20 20:18:04"), imageURL: 'images/forFlutterDP3.jpg', messageText: ['Hello3']),
-    ChatUser(name: 'Jerome', time: DateTime.parse("2021-07-18 20:18:04"), imageURL: 'images/forFlutterDP4.jpg', messageText: ['Hello4']),
-    ChatUser(name: 'Jaini', time: DateTime.parse("2021-07-19 20:18:04"), imageURL: 'images/forFlutterDP5.jpg', messageText: ['Hello5']),
-    ChatUser(name: 'Remy', time: DateTime.parse("2021-07-20 20:18:04"), imageURL: 'images/forFlutterDP6.jpg', messageText: ['Hello6']),
-    ChatUser(name: 'Rayson', time: DateTime.parse("2020-07-20 20:18:04"), imageURL: 'images/forFlutterDP7.jpg', messageText: ['Hello7']),
-    ChatUser(name: 'Jo', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP8.jpg', messageText: ['Hello8']),
-    ChatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: ['Hello9']),
-    ChatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: ['Hello9']),
-    ChatUser(name: 'Joe', time: DateTime.parse("1969-07-20 20:18:04"), imageURL: 'images/forFlutterDP9.jpg', messageText: ['Hello9']),
-  ];
 
   TextEditingController searchBarController = new TextEditingController();
 
-  generateChats(List chats){
-    int indexNum = 0;
+  generateChats(){
     var chatList = <Widget>[];
 
     chatList.add(SizedBox(height: 25));
-    chats.forEach((chat) {
-      chatList.add(IndividualChatWidget(individualChat: chat)
+    // Thread_id is id of thread, thread_info contains chatting_with_id, chatting_with_username, messages(list)
+    ChatData_static.message_threads.forEach((thread_id, thread_info) {
+      final DateTime datetime_lastMessage = DateTime.parse(thread_info['messages'][0]['sent_at'].replaceFirst('T', ' '));
+
+      chatList.add(IndividualChatWidget(ChatPreviewInfo: ChatThread(chatting_with_id: thread_info['chatting_with_id'], chatting_with_name: thread_info['chatting_with_username'], chatting_with_avatarUrl: thread_info['chatting_with_avatarUrl'], messages: thread_info['messages'], last_message_time: datetime_lastMessage))
       );
     });
     chatList.add(SizedBox(height: 200));
@@ -49,7 +36,14 @@ class chatsState extends State<chats>{
     return SingleChildScrollView(
       physics: widget.isPanelOpenNow ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
         child:Column(
-          children: generateChats(chatUsers)
+          children: ChatData_static.message_threads.length!=0 ? generateChats() : <Widget> [
+            SizedBox(height: 150),
+            Text('No messages yet...',
+              style: TextStyle(
+                fontSize: 20
+              ),
+            )
+          ]
         )
     );
   }

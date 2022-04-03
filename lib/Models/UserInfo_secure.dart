@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class UserInfoFlexi_noPassword{
   String? username;
   String? email;

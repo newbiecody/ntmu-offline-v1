@@ -2,21 +2,21 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:ntmu/Models/UserInfo_secure.dart';
 import 'package:ntmu/Models/imgModel.dart';
 import 'package:ntmu/api_functions/apiMessageDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:image_downloader/image_downloader.dart';
 import 'package:sqflite/sqflite.dart';
 
+import '../Components/chats_static_data.dart';
 import '../Components/database_helper.dart';
 import '../Components/functs.dart';
 import 'package:path/path.dart';
 
 import '../Screens/PostLogin/baseScreen_postLogin.dart';
+import 'chatsApi.dart';
 
 
 Future saveToken(String token) async{
@@ -36,9 +36,6 @@ Future <void> requestLoginToken(String username, String password) async {
   print("Signing in...");
   final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/api-auth-token/");
 
-  // UserModel user;
-  // List <MatchModel> match= [];
-
   Map <String, String> body = {
     'username': username,
     'password': password,
@@ -49,7 +46,6 @@ Future <void> requestLoginToken(String username, String password) async {
   if(response.statusCode == 200){
     final responseJson = json.decode(response.body);
     saveToken(responseJson["token"]);
-    // print(responseJson["token"]);
   }else{
     // return false;
   }
@@ -133,7 +129,6 @@ Future getProfileImageFromDB() async{
 Future retrieveUserInfo() async{
   print("Fetching token...");
   final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/user-profile/");
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
   var token = await checkForToken();
   int counter = 0;
   while(token==null){
@@ -164,11 +159,12 @@ login(BuildContext context, String username, String password) async{
 
 
     List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear'];
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
     var userData = await retrieveSharedPrefs_userInfo(list_dataToFetch);
     var loginDataPacket = new UserInfoFlexi_noPassword();
     loginDataPacket.fromJson(userData);
 
+    // Load chat data
+    await retrieveChats();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp:dp)), (route) => false);
     }on Exception{
@@ -184,11 +180,12 @@ loginWithToken(BuildContext context) async{
     await saveProfilePicture();
     var dp = await getProfileImageFromDB();
     List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear'];
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
     var userData = await retrieveSharedPrefs_userInfo(list_dataToFetch);
     var loginDataPacket = new UserInfoFlexi_noPassword();
     loginDataPacket.fromJson(userData);
 
+    // Load Chat data
+    await retrieveChats();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp: dp)), (route) => false);
   }on Exception{

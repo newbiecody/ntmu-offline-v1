@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
 import 'package:ntmu/Models/GeneralAccountInfo.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/listView_individualChat.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/IndividualChatWidget.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/YourPostsWidgets/listView_individualPost.dart';
 import 'package:ntmu/Models/CommentObject.dart';
 
