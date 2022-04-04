@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/ChatMessage.dart';
 import 'package:ntmu/Models/ChatThread.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/MessagesWidgets/ChatsWidgets/ChatMessagesArea.dart';
 
@@ -18,36 +17,6 @@ class openChatPageState extends State<openChatPage> {
 
   final myController = TextEditingController();
   static bool _imageError = false;
-  // List <ChatMessage> chatHistory = [
-  //   ChatMessage(user_or_match: "user", message: 'Hello wth', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Hello?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'How\'s life?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Great i guess?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'nice', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Want to hang out tmr?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'yea sure', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'koufu at 12pm?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'err okay', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'seeya then', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'Hello wth', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Hello?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'How\'s life?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Great i guess?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'nice', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Want to hang out tmr?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'yea sure', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'koufu at 12pm?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'err okay', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'Hello wth', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Hello?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'How\'s life?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Great i guess?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'nice', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'Want to hang out tmr?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'yea sure', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "match", message: 'koufu at 12pm?', dateSent: DateTime.parse("2021-07-20 20:18:04")),
-  //   ChatMessage(user_or_match: "user", message: 'err okay', dateSent: DateTime.parse("2021-07-20 20:18:04"))
-  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +59,6 @@ class openChatPageState extends State<openChatPage> {
                           ),)
                       ],
                     )
-
                   ],
                 ),
               ),
@@ -128,7 +96,9 @@ class openChatPageState extends State<openChatPage> {
                             setState(() {
                               if(myController.text.trim() != null && myController.text.trim() != ''){
                                 // Send chat function here
-                                // ChatData_static.message_threads['messages'].add(ChatMessage(sender_id: 'sender', content: myController.text, dateSent: DateTime.now()));
+                                final thread_id = widget.ChatData.thread_id;
+                                replyMessage(thread_id, myController.text);
+                                widget.ChatData.messages.add({'sent_at': DateTime.now().toString(), 'content': myController.text, 'sender_id': ChatData_static.user_id});
                               }
                             });
                             myController.clear();

@@ -23,8 +23,7 @@ class chatsState extends State<chats>{
     // Thread_id is id of thread, thread_info contains chatting_with_id, chatting_with_username, messages(list)
     ChatData_static.message_threads.forEach((thread_id, thread_info) {
       final DateTime datetime_lastMessage = DateTime.parse(thread_info['messages'][0]['sent_at'].replaceFirst('T', ' '));
-
-      chatList.add(IndividualChatWidget(ChatPreviewInfo: ChatThread(chatting_with_id: thread_info['chatting_with_id'], chatting_with_name: thread_info['chatting_with_username'], chatting_with_avatarUrl: thread_info['chatting_with_avatarUrl'], messages: thread_info['messages'], last_message_time: datetime_lastMessage))
+      chatList.add(IndividualChatWidget(ChatPreviewInfo: ChatThread(chatting_with_id: thread_info['chatting_with_id'], chatting_with_name: thread_info['chatting_with_username'], chatting_with_avatarUrl: thread_info['chatting_with_avatarUrl'], messages: thread_info['messages'], last_message_time: datetime_lastMessage, thread_id: int.parse(thread_id)))
       );
     });
     chatList.add(SizedBox(height: 200));

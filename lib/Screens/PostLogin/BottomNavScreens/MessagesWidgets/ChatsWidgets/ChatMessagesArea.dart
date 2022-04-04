@@ -28,11 +28,11 @@ class ChatMessagesAreaState extends State<ChatMessagesArea> {
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: Align(
-                alignment: int.parse(widget.chatMessages[index].sender_id) == ChatData_static.user_id ? Alignment.centerLeft : Alignment.centerRight,
+                alignment: int.parse(widget.chatMessages[index].sender_id) != ChatData_static.user_id ? Alignment.centerLeft : Alignment.centerRight,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: int.parse(widget.chatMessages[index].sender_id) == ChatData_static.user_id ? Colors.black12 : Color(0XFF99DDC8)
+                    color: int.parse(widget.chatMessages[index].sender_id) != ChatData_static.user_id ? Colors.black12 : Color(0XFF99DDC8)
                   ),
                   padding: EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
                   child: Text(widget.chatMessages[index].content),

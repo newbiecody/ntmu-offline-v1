@@ -188,7 +188,7 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                             actions: <Widget>[
                               TextButton(
                                 onPressed: (){
-
+                                  // Remember to add function to remove token.
                                   RestartWidget.restartApp(context);
                                 },
                                 child: const Text('Yes'),

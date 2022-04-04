@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ntmu/Components/announcements_static.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
+import 'package:ntmu/api_functions/announcementsApi.dart';
 
 import '../../../Components/chats_static_data.dart';
 import '../../../Models/UserInfo_secure.dart';
@@ -112,8 +114,10 @@ class recommendationPageState extends State<recommendationPage>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           ElevatedButton(
-                              onPressed: (){
-                                print(ChatData_static.message_threads);
+                              onPressed: () async{
+                                // Test functions here
+                                getAdminAnnouncements();
+                                // print(Announcements_static.announcements_list);
                               },
                               child: Text(
                                   'Accept'

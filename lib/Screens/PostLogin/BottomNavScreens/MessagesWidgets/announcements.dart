@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ntmu/Components/functs.dart';
-import 'package:ntmu/Models/AnnouncementHeaderInfo.dart';
-
+import 'package:ntmu/Components/announcements_static.dart';
+import 'package:intl/intl.dart';
 
 class announcements extends StatefulWidget{
   //dataPacket userData;
@@ -14,13 +13,15 @@ class announcements extends StatefulWidget{
 }
 
 class announcementsState extends State<announcements>{
-  List<AnnouncementHeaderInfo> announcementsList = [
-    AnnouncementHeaderInfo(poster: 'Admin', messageText: 'Welcome to NTmU! I hope that you will enjoy your stay here', time: DateTime.parse("2021-07-20 20:18:04")),
-    AnnouncementHeaderInfo(poster: 'Admin', messageText: 'There are some patches that had been added to ', time: DateTime.parse("2021-09-16 20:18:04"))
-  ];
+  // List<AnnouncementHeaderInfo> announcementsList = [
+  //   AnnouncementHeaderInfo(poster: 'Admin', messageText: 'Welcome to NTmU! I hope that you will enjoy your stay here', time: DateTime.parse("2021-07-20 20:18:04")),
+  //   AnnouncementHeaderInfo(poster: 'Admin', messageText: 'There are some patches that had been added to ', time: DateTime.parse("2021-09-16 20:18:04"))
+  // ];
 
   generateAnnouncements(List announcements){
-    var announcementTiles = <Widget>[];
+    var announcementTiles = <Widget>[SizedBox(height: 20)];
+    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+
     announcements.forEach((element) {
       announcementTiles.add(
           Container(
@@ -32,7 +33,7 @@ class announcementsState extends State<announcements>{
                 SizedBox(height: 10),
                 Align(child: Text(element.messageText), alignment: Alignment.centerLeft),
                 SizedBox(height: 10),
-                Align(child: Text(element.time.toString()), alignment: Alignment.centerRight)
+                Align(child: (element.time != null) ? Text(formatter.format(element.time)) : Text(''), alignment: Alignment.centerRight)
                 ],
             ),
           )
@@ -46,9 +47,10 @@ class announcementsState extends State<announcements>{
 
   @override
   Widget build(BuildContext context){
-    return Center(
+    return SingleChildScrollView(
+      physics: widget.isPanelOpenNow ? AlwaysScrollableScrollPhysics() : NeverScrollableScrollPhysics(),
       child: Column(
-        children: generateAnnouncements(announcementsList),
+        children: generateAnnouncements(Announcements_static.announcements_list),
       )
     );
   }

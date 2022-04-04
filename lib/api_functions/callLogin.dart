@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:ntmu/Models/UserInfo_secure.dart';
 import 'package:ntmu/Models/imgModel.dart';
+import 'package:ntmu/api_functions/announcementsApi.dart';
 import 'package:ntmu/api_functions/apiMessageDialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
@@ -186,6 +187,8 @@ loginWithToken(BuildContext context) async{
 
     // Load Chat data
     await retrieveChats();
+    // Load Announcements
+    await getAdminAnnouncements();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp: dp)), (route) => false);
   }on Exception{
