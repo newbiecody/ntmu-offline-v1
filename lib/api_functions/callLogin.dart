@@ -8,16 +8,19 @@ import 'package:ntmu/Models/UserInfo_secure.dart';
 import 'package:ntmu/Models/imgModel.dart';
 import 'package:ntmu/api_functions/announcementsApi.dart';
 import 'package:ntmu/api_functions/apiMessageDialog.dart';
+import 'package:ntmu/common/GLOBAL_SETTINGS.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../Components/chats_static_data.dart';
 import '../Components/database_helper.dart';
 import '../Components/functs.dart';
 import 'package:path/path.dart';
 
+import '../RestartWidget.dart';
 import '../Screens/PostLogin/baseScreen_postLogin.dart';
 import 'chatsApi.dart';
+import 'getForumPosts.dart';
+import 'match.dart';
 
 
 Future saveToken(String token) async{
@@ -33,10 +36,9 @@ Future checkForToken() async{
   return token;
 }
 
-Future <void> requestLoginToken(String username, String password) async {
+Future <void> requestLoginToken(String username, String password, BuildContext context) async {
   print("Signing in...");
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/api-auth-token/");
-
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/api-auth-token/");
   Map <String, String> body = {
     'username': username,
     'password': password,
@@ -48,9 +50,8 @@ Future <void> requestLoginToken(String username, String password) async {
     final responseJson = json.decode(response.body);
     saveToken(responseJson["token"]);
   }else{
-    // return false;
+    showApiMessageDialog(context, 'Error', 'There was a login error, please try again.');
   }
-  // return true;
 }
 
 Future updateSharedPrefs_userInfo(response) async{
@@ -80,6 +81,7 @@ retrieveSharedPrefs_userInfo(List<String> toRetrieve) async{
   toRetrieve.forEach((arg) async {
     data[arg] = preferences.getString("ntmu_$arg");
   });
+
   return data;
 }
 
@@ -87,11 +89,11 @@ Future <void> saveProfilePicture() async {
   print("Saving profile picture...");
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? url = await prefs.getString("ntmu_avatar_url");
-
   // Download image
   // final ByteData imageData = await NetworkAssetBundle(Uri.parse("http://10.0.2.2:8000" + url!)).load("");
   // final Uint8List bytes = imageData.buffer.asUint8List();
-  final Uint8List bytes = await http.get(Uri.parse("http://10.0.2.2:8000" + url!)).then(
+  // final Uint8List bytes = await http.get(Uri.parse("http://10.0.2.2:8000" + url!)).then(
+  final Uint8List bytes = await http.get(Uri.parse("${address_targetMachine_uri_media}" + url!)).then(
           (value) => value.bodyBytes);
   final String base64Img = base64Encode(bytes);
   // Create imgData object
@@ -120,7 +122,6 @@ Future getProfileImageFromDB() async{
   final imgs = await getImgData(database);
   imgs.forEach((img){
     if(img['id'] == 0){
-      print(img['data']);
       return Image.memory(base64Decode(img['data']));
     }
   });
@@ -129,7 +130,7 @@ Future getProfileImageFromDB() async{
 
 Future retrieveUserInfo() async{
   print("Fetching token...");
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/user-profile/");
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/user-profile/");
   var token = await checkForToken();
   int counter = 0;
   while(token==null){
@@ -145,27 +146,40 @@ Future retrieveUserInfo() async{
       'Authorization': 'Token $token'
     };
     final response = await http.get(url, headers: headers);
-    print(response.body);
     await updateSharedPrefs_userInfo(response.body);
   }
 }
 
-login(BuildContext context, String username, String password) async{
 
+retrieveAccountInformation() async{
+  // Load chat data
+  await retrieveChats();
+  // Load Announcements
+  await getAdminAnnouncements();
+  // Load matches
+  // await checkMatchingStatus();
+  await getMatchedUsers();
+  // Load forums
+  await getForumPosts();
+}
+
+
+
+login_withCredentials(BuildContext context, String username, String password) async{
   try{
-    await requestLoginToken(username, password);
+    await requestLoginToken(username, password, context);
     await retrieveUserInfo(); // From server
     await saveProfilePicture();
     var dp = await getProfileImageFromDB();
 
 
-    List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear'];
+    List <String> list_dataToFetch = ['username', 'email', 'fullname', 'birthday', 'gender', 'hobbies', 'religion', 'countryOfOrigin', 'profileDesc', 'course', 'matriculationYear',  'avatar_url'];
     var userData = await retrieveSharedPrefs_userInfo(list_dataToFetch);
     var loginDataPacket = new UserInfoFlexi_noPassword();
     loginDataPacket.fromJson(userData);
 
-    // Load chat data
-    await retrieveChats();
+    // Retrieve account information
+    await retrieveAccountInformation();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp:dp)), (route) => false);
     }on Exception{
@@ -174,7 +188,7 @@ login(BuildContext context, String username, String password) async{
 
 }
 
-loginWithToken(BuildContext context) async{
+login_withToken(BuildContext context) async{
 
   try{
     await retrieveUserInfo(); // From server
@@ -185,14 +199,19 @@ loginWithToken(BuildContext context) async{
     var loginDataPacket = new UserInfoFlexi_noPassword();
     loginDataPacket.fromJson(userData);
 
-    // Load Chat data
-    await retrieveChats();
-    // Load Announcements
-    await getAdminAnnouncements();
+    // Retrieve account information
+    await retrieveAccountInformation();
 
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BaseScreen_postLogin(userData: loginDataPacket, dp: dp)), (route) => false);
   }on Exception{
     showApiMessageDialog(context, "Error", "There was an error with sign in, please try again later.");
   }
+
+}
+
+logout(BuildContext context) async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  preferences.clear();
+  RestartWidget.restartApp(context);
 
 }

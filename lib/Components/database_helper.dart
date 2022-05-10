@@ -10,3 +10,4 @@ Future getImgData(Database database) async {
   final List <Map> imgs = await db.query('ntmu_img');
   return imgs;
 }
+

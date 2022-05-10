@@ -30,11 +30,10 @@ class create_account_confirmation extends StatelessWidget{
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                            // borderRadius: BorderRadius.circular(20),
                             color: Colors.black,
                             image: DecorationImage(
                                 fit: BoxFit.contain,
-                                image: (UserInfoStatic.profilePicture is File) ? FileImage(UserInfoStatic.profilePicture) : UserInfoStatic.profilePicture,// (creationData.profilePicture != null) ? creationData.profilePicture: AssetImage("images/blank-profile-picture-973460.png"),
+                                image: (UserInfoStatic.profilePicture is File) ? FileImage(UserInfoStatic.profilePicture) : UserInfoStatic.profilePicture,
                             )
                         ),
                       ),
@@ -278,7 +277,6 @@ class create_account_confirmation extends StatelessWidget{
                       ),
                       SizedBox(height: 25),
                       Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ElevatedButton(

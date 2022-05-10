@@ -134,7 +134,6 @@ class CoursePicker extends StatefulWidget{
 
 class _CoursePickerWidgetState extends State<CoursePicker>{
 
-  //final courseList = readByLine_txt('assets/allcourses.txt');
   final courseList = list_allCourses;
   String selectedValue = list_allCourses[0];
 

@@ -3,13 +3,17 @@ import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo_secure.dart';
 import 'package:ntmu/RestartWidget.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/newPost.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/matches.dart';
-import 'package:ntmu/Screens/PostLogin/BottomNavScreens/messages.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/main_matches.dart';
+import 'package:ntmu/Screens/PostLogin/BottomNavScreens/main_messages.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/forum.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:ntmu/Screens/loadingScreen.dart';
 import 'package:ntmu/api_functions/callLogin.dart';
+import 'package:ntmu/api_functions/chatsApi.dart';
+import 'package:ntmu/api_functions/getForumPosts.dart';
 
+import '../../Components/MatchedUsersList_static.dart';
+import '../../api_functions/match.dart';
 import 'SettingsDrawer/profile.dart';
 import 'SettingsDrawer/settings.dart';
 
@@ -27,12 +31,13 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
   Widget _body = LoadingScreen();
   static int _selectedIndex = 0;
 
-  void _onItemTapped(int index){
-    setState(() {
+  void _onItemTapped(int index)  {
+    setState(()  {
       _selectedIndex = index;
     });
   }
   generateMainPage(UserInfoFlexi_noPassword userData){
+    retrieveChats();
     List<Widget> _widgetOptions = [
       recommendationPage(userData: userData),
       forumPage(userData: userData),
@@ -123,24 +128,24 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                       )
                       ),
                       ),
-                      Container(
-                        height: 45,
-                        child: GestureDetector(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage(userData: widget.userData))));
-                          },
-                        child: Row(
-                        children: <Widget>[
-                          Expanded(child: Icon(Icons.settings_outlined),
-                          flex: 1),
-                          Expanded
-                          (child: Text('Settings',
-                                style: TextStyle(fontSize: 16)),
-                            flex: 3),
-                      ],
-                    )
-                ),
-              ),
+              // Container(
+              //   height: 45,
+              //   child: GestureDetector(
+              //     onTap: (){
+              //       Navigator.of(context).push(MaterialPageRoute(builder: (context) =>(settingsPage(userData: widget.userData))));
+              //     },
+              //   child: Row(
+              //   children: <Widget>[
+              //     Expanded(child: Icon(Icons.settings_outlined),
+              //     flex: 1),
+              //     Expanded
+              //     (child: Text('Settings',
+              //         style: TextStyle(fontSize: 16)),
+              //         flex: 3),
+              //         ],
+              //       )
+              //   ),
+              // ),
               Container(
                 height: 45,
                 child: GestureDetector(
@@ -189,7 +194,8 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
                               TextButton(
                                 onPressed: (){
                                   // Remember to add function to remove token.
-                                  RestartWidget.restartApp(context);
+                                  logout(context);
+                                  // RestartWidget.restartApp(context);
                                 },
                                 child: const Text('Yes'),
                               ),

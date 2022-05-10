@@ -1,21 +1,16 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:ntmu/Models/MatchModel.dart';
-import 'package:ntmu/api_functions/apiMessageDialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Components/functs.dart';
-import '../Models/UserModel.dart';
+import '../common/GLOBAL_SETTINGS.dart';
 
 
 // Future <UserModel?> populateSignupFormPagesAPI(BuildContext context) async {
 Future populateSignupFormPagesAPI() async {
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/info-api/");
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/info-api/");
 
   final response = await http.get(url);
 

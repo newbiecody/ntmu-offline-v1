@@ -34,12 +34,6 @@ MaterialColor CreateMaterialColor(Color color) {
   return MaterialColor(color.value, swatch);
 }
 
-void authenticateUser(String username, String password, int flag){
-  //authenticateUser code here
-  //if flag == 0: After account creation
-  //if flag == 1: Sign in with existing account
-
-}
 
 void clearSharedPreferences(){
 
@@ -225,11 +219,6 @@ generateTags(List list_of_tags){
 
 }
 
-retrieveComments(String postID){
-  //fake comment generation
-
-}
-
 
 final list_allCourses = [
   'Accountancy',
@@ -345,5 +334,19 @@ createPath(String dir) async{
       path.create(recursive: true);
     }catch(_){}
 
+  }
+}
+
+calculateYoM(yearOfStudy){
+  var now = new DateTime.now();
+  var startOfYear = new DateTime(now.year, 1, 1);
+  if(now.month>=8){
+    return now.year;
+  }else{
+    if(now.difference(startOfYear).inDays>212){
+      return now.year-yearOfStudy+1;
+    }else{
+      return now.year-yearOfStudy;
+    }
   }
 }

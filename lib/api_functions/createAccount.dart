@@ -1,40 +1,24 @@
 import 'dart:convert';
-import 'dart:typed_data';
-
-import 'package:flutter/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:http/http.dart' as http;
 
 import '../Components/functs.dart';
+import '../common/GLOBAL_SETTINGS.dart';
 import 'apiMessageDialog.dart';
 import 'callLogin.dart';
 
 
 
 Future createAccountAPI(BuildContext context, UserInfo signupDataPacket) async {
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/signup/");
-  // UserInfo user;
-  // // List <MatchModel> match= [];
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/signup/");
   List <String> list_hobbiesByID = [];
   signupDataPacket.hobbies.forEach((hobby) {
     list_hobbiesByID.add(PopulateSignupFormData.map_HobbiesWithID[hobby].toString());
 
   });
 
-  calculateYoM(yearOfStudy){
-    var now = new DateTime.now();
-    var startOfYear = new DateTime(now.year, 1, 1);
-    if(now.month>=8){
-      return now.year;
-    }else{
-      if(now.difference(startOfYear).inDays>212){
-        return now.year-yearOfStudy+1;
-      }else{
-        return now.year-yearOfStudy;
-      }
-    }
-  }
+
 
   String yearOfMatriculation = calculateYoM(signupDataPacket.year_of_matriculation).toString();
 
@@ -59,7 +43,7 @@ Future createAccountAPI(BuildContext context, UserInfo signupDataPacket) async {
   if(response.statusCode == 200){
     final responseJson = json.decode(response.body);
     await saveToken(responseJson["token"]);
-    await loginWithToken(context);
+    await login_withToken(context);
   }else{
     showApiMessageDialog(context, "Login error", "There seems to be an error logging you in, please try again.");
   }

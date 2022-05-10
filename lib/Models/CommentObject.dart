@@ -1,7 +1,8 @@
 import 'package:ntmu/Models/GeneralAccountInfo.dart';
 
 class Comment{
-  GeneralAccountInfo commentingUser;
+  // GeneralAccountInfo commentingUser;
+  String commentingUser;
   String comment;
   // int upvote;
   // int downvote;

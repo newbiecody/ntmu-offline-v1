@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ntmu/Models/ForumPostHeaderInfo.dart';
 import 'package:ntmu/Screens/PostLogin/BottomNavScreens/ForumWidgets/postPreview.dart';
-
-import '../../../../Models/UserInfo.dart';
 import '../../../../Models/UserInfo_secure.dart';
 
 class NewPost extends StatefulWidget{
@@ -29,6 +27,7 @@ class NewPostState extends State<NewPost> {
     });
 
     return ForumPostHeaderInfo(
+        topicID: '-1',
         headerContent: title,
         mainContent: mainContent,
         originalPoster: userinfo.name!,

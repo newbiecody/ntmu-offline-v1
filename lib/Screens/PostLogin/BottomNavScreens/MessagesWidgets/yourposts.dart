@@ -27,29 +27,29 @@ DateTime timeOfPost;
 
 class yourPostsState extends State<yourPosts>{
 
-  List <ForumPostHeaderInfo> forumPostsByUser = [
-    ForumPostHeaderInfo(headerContent: 'Hello does anybody want to study together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-07-20 20:18:04"), comments: [
-      Comment(commentingUser: account1, comment: 'Sure, sign me up.'),
-      Comment(commentingUser: account2, comment: 'Sure, sign me up.'),
-      Comment(commentingUser: account3, comment: 'Sure, sign me up.'),
-      Comment(commentingUser: account4, comment: 'Sure, sign me up.'),
-      Comment(commentingUser: account5, comment: 'Sure, sign me up.'),
-    ], likedBy: ['Amarla, Jacob'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
-    ForumPostHeaderInfo(headerContent: 'Hello does anybody want to eat together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-08-25 20:18:04"), comments: [
-      Comment(commentingUser: account1, comment: 'Why not? 1'),
-      Comment(commentingUser: account2, comment: 'Why not? 2'),
-      Comment(commentingUser: account3, comment: 'Why not? 3'),
-      Comment(commentingUser: account4, comment: 'Why not? 4'),
-      Comment(commentingUser: account5, comment: 'Why not? 5'),
-    ],  likedBy: ['Joanne, John, Jumin'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
-    ForumPostHeaderInfo(headerContent: 'Hello does anybody want to play together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-08-28 10:18:04"), comments: [
-      Comment(commentingUser: account1, comment: 'Why not? 8'),
-      Comment(commentingUser: account2, comment: 'Why not? 9'),
-      Comment(commentingUser: account3, comment: 'Why not? 10'),
-      Comment(commentingUser: account4, comment: 'Why not? 11'),
-      Comment(commentingUser: account5, comment: 'Why not? 12'),
-    ], likedBy: ['Dan, Hamsworn'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
-  ];
+  // List <ForumPostHeaderInfo> forumPostsByUser = [
+  //   ForumPostHeaderInfo(topicID: '0', headerContent: 'Hello does anybody want to study together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-07-20 20:18:04"), comments: [
+  //     Comment(commentingUser: account1, comment: 'Sure, sign me up.'),
+  //     Comment(commentingUser: account2, comment: 'Sure, sign me up.'),
+  //     Comment(commentingUser: account3, comment: 'Sure, sign me up.'),
+  //     Comment(commentingUser: account4, comment: 'Sure, sign me up.'),
+  //     Comment(commentingUser: account5, comment: 'Sure, sign me up.'),
+  //   ], likedBy: ['Amarla, Jacob'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
+  //   ForumPostHeaderInfo(topicID: '0', headerContent: 'Hello does anybody want to eat together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-08-25 20:18:04"), comments: [
+  //     Comment(commentingUser: account1, comment: 'Why not? 1'),
+  //     Comment(commentingUser: account2, comment: 'Why not? 2'),
+  //     Comment(commentingUser: account3, comment: 'Why not? 3'),
+  //     Comment(commentingUser: account4, comment: 'Why not? 4'),
+  //     Comment(commentingUser: account5, comment: 'Why not? 5'),
+  //   ],  likedBy: ['Joanne, John, Jumin'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
+  //   ForumPostHeaderInfo(topicID: '0', headerContent: 'Hello does anybody want to play together?', mainContent: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', originalPoster: 'Test User 1', timeOfPost: DateTime.parse("2021-08-28 10:18:04"), comments: [
+  //     Comment(commentingUser: account1, comment: 'Why not? 8'),
+  //     Comment(commentingUser: account2, comment: 'Why not? 9'),
+  //     Comment(commentingUser: account3, comment: 'Why not? 10'),
+  //     Comment(commentingUser: account4, comment: 'Why not? 11'),
+  //     Comment(commentingUser: account5, comment: 'Why not? 12'),
+  //   ], likedBy: ['Dan, Hamsworn'], lastLikedDateTime: DateTime.parse("2021-10-20 20:18:04"), tags: []),
+  // ];
 
   generateListOfUserPosts(List forumPostsByUser){
     var listView_userPosts = <Widget>[];
@@ -68,7 +68,7 @@ class yourPostsState extends State<yourPosts>{
   Widget build(BuildContext context){
     return Center(
       child: Column(
-        children: generateListOfUserPosts(forumPostsByUser),
+        // children: generateListOfUserPosts(forumPostsByUser),
       ),
     );
   }

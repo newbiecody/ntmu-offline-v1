@@ -32,7 +32,7 @@ class EditPostState extends State<EditPost> {
   final mainContentFieldController = TextEditingController();
   void initState() {
     super.initState();
-    mainContentFieldController.text = widget.postInfo.mainContent;
+    mainContentFieldController.text = widget.postInfo.headerContent;
     mainContentFieldController.addListener(() {
       String text = mainContentFieldController.text;
       mainContentFieldController.value = mainContentFieldController.value.copyWith(
@@ -57,6 +57,7 @@ class EditPostState extends State<EditPost> {
 
   generatePostDataPacket(ForumPostHeaderInfo postInfo, String mainContent){
     return ForumPostHeaderInfo(
+        topicID: postInfo.topicID,
         headerContent: postInfo.headerContent,
         mainContent: mainContent,
         originalPoster: postInfo.originalPoster,

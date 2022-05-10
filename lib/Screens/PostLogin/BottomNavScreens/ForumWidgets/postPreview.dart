@@ -84,7 +84,7 @@ class PostPreviewState extends State<PostPreview> {
           ),
           Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(widget.postData.mainContent,
+          child: Text(widget.postData.headerContent,
               style: TextStyle(
                 fontSize: 16
                 ),

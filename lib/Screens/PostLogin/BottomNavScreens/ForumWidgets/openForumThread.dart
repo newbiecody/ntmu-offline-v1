@@ -18,7 +18,6 @@ class OpenForumThread extends StatefulWidget{
 class OpenForumThreadState extends State<OpenForumThread> {
 
   final commentController = new TextEditingController();
-  //var _selectedItem = null;
   setPopupMenuOptions(String username, ForumPostHeaderInfo postInfo){
     List popupMenuActions = [];
     if(username != postInfo.originalPoster){
@@ -35,7 +34,6 @@ class OpenForumThreadState extends State<OpenForumThread> {
     }
     return popupMenuActions;
   }
-
 
   PopupMenuItem<MenuItem> buildItem(MenuItem item) => PopupMenuItem(
 
@@ -66,7 +64,7 @@ class OpenForumThreadState extends State<OpenForumThread> {
             return setPopupMenuOptions(widget.username, widget.individualPost).map<PopupMenuEntry>((menuitem) => PopupMenuItem(
                 child: Text(menuitem),
                 value: menuitem
-              )
+            )
             ).toList();
           },
         onSelected: (menuitem){
@@ -101,9 +99,7 @@ class OpenForumThreadState extends State<OpenForumThread> {
             });
         },
           )
-        ]
-
-        ),
+        ]),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -124,7 +120,7 @@ class OpenForumThreadState extends State<OpenForumThread> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(widget.individualPost.mainContent,
+                child: Text(widget.individualPost.headerContent,
                   style: TextStyle(
                     fontSize: 16
                   ),
@@ -136,18 +132,18 @@ class OpenForumThreadState extends State<OpenForumThread> {
                 children: generateTags(widget.individualPost.tags)),
               Row(
                 children: <Widget>[
-                  IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.arrow_circle_up_outlined)),
-                  Text(widget.individualPost.likedBy.length.toString()),
-                  IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.arrow_circle_down_outlined)),
+                  // IconButton(
+                  //     onPressed: (){},
+                  //     icon: Icon(Icons.arrow_circle_up_outlined)),
+                  // Text(widget.individualPost.likedBy.length.toString()),
+                  // IconButton(
+                  //     onPressed: (){},
+                  //     icon: Icon(Icons.arrow_circle_down_outlined)),
                   Expanded(
                     child: SizedBox(),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal:20),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
                     child: Row(
                         children: <Widget>[
                           Icon(Icons.chat_bubble_outline),
@@ -182,6 +178,7 @@ class OpenForumThreadState extends State<OpenForumThread> {
                         //do nothing
                       }else{
                         setState(() {
+
                           //widget.individualPost.comments.add(Comment(commentingUser: ))
                         });
                         //post comment

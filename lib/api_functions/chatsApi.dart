@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'package:ntmu/Components/chats_static_data.dart';
 import 'package:ntmu/Models/ChatMessage.dart';
 import 'package:http/http.dart' as http;
+import '../common/GLOBAL_SETTINGS.dart';
 import 'callLogin.dart';
 
 Future retrieveChats() async{
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/all-chats/");
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/all-chats/");
   var token = await checkForToken();
 
   if(token != null){
@@ -22,7 +23,7 @@ Future retrieveChats() async{
 
 Future createNewMessage(String content) async{
   // When starting new chat
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/create-message/");
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/create-message/");
   var token = await checkForToken();
   if(token != null){
     final headers = {
@@ -38,7 +39,7 @@ Future createNewMessage(String content) async{
 
 Future replyMessage(int thread_id, String content) async{
   // When replying to existing chat
-  final url = Uri.parse("http://10.0.2.2:8000/api_ntmuMobile/reply-message/");
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/reply-message/");
   var token = await checkForToken();
   if(token != null){
     final headers = {

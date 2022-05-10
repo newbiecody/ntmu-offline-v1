@@ -17,9 +17,9 @@ class messagesPage extends StatefulWidget{
 }
 
 class messagesPageState extends State<messagesPage>{
-  static int userClickOption = 0;
+  static int userClickOption = 1;
   //notif, announcement, chats, yourposts corresponds to index 0,1,2,3 of _selectedOption
-  static List <bool> _selectedOption = [true,false,false,false];
+  static List <bool> _selectedOption = [false,true,false,false];
   //PanelController _pc = new PanelController();
   static bool _isPanelOpenNow = false;
   generateSubscreenMessages(userClickOption,sc, bool isPanelOpenNow) {
@@ -46,8 +46,6 @@ class messagesPageState extends State<messagesPage>{
       },
       maxHeight: MediaQuery.of(context).size.height,
       minHeight: MediaQuery.of(context).size.height*.6,
-      //controller: _pc,
-      //panelBuilder: (ScrollController sc) => _scrollingList(sc, _pc.isPanelOpen),
       panelBuilder: (ScrollController sc) => _scrollingList(sc, _isPanelOpenNow),
       body: Center(
         child: Column(
@@ -56,24 +54,24 @@ class messagesPageState extends State<messagesPage>{
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              OutlinedButton(
-                  onPressed: (){
-                    setState(() {
-                      _selectedOption = [false,false,false,false];
-                      userClickOption = 0;
-                      _selectedOption[userClickOption] = !_selectedOption[userClickOption];
-                    });
-                  },
-                  child: Text(
-                      'Notifications'
-                  ),
-                  style: OutlinedButton.styleFrom(
-                      backgroundColor: _selectedOption[0]? Color(0XFF99DDC8):Color(0X4099DDC8),
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                      minimumSize: Size(150,35)
-                  )
-              ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.1),
+              // OutlinedButton(
+              //     onPressed: (){
+              //       setState(() {
+              //         _selectedOption = [false,false,false,false];
+              //         userClickOption = 0;
+              //         _selectedOption[userClickOption] = !_selectedOption[userClickOption];
+              //       });
+              //     },
+              //     child: Text(
+              //         'Notifications'
+              //     ),
+              //     style: OutlinedButton.styleFrom(
+              //         backgroundColor: _selectedOption[0]? Color(0XFF99DDC8):Color(0X4099DDC8),
+              //         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+              //         minimumSize: Size(150,35)
+              //     )
+              // ),
+              // SizedBox(width: MediaQuery.of(context).size.width * 0.1),
               OutlinedButton(
                   onPressed: (){
                     setState(() {
@@ -113,24 +111,24 @@ class messagesPageState extends State<messagesPage>{
                       minimumSize: Size(150,35)
                   )
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.1),
-              OutlinedButton(
-                  onPressed: (){
-                    setState(() {
-                      _selectedOption = [false,false,false,false];
-                      userClickOption = 3;
-                      _selectedOption[userClickOption] = !_selectedOption[userClickOption];
-                    });
-                  },
-                  child: Text(
-                      'Your Posts'
-                  ),
-                  style: OutlinedButton.styleFrom(
-                      backgroundColor: _selectedOption[3]? Color(0XFF99DDC8):Color(0X4099DDC8),
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
-                      minimumSize: Size(150,35)
-                  )
-              ),
+              // SizedBox(width: MediaQuery.of(context).size.width * 0.1),
+              // OutlinedButton(
+              //     onPressed: (){
+              //       setState(() {
+              //         _selectedOption = [false,false,false,false];
+              //         userClickOption = 3;
+              //         _selectedOption[userClickOption] = !_selectedOption[userClickOption];
+              //       });
+              //     },
+              //     child: Text(
+              //         'Your Posts'
+              //     ),
+              //     style: OutlinedButton.styleFrom(
+              //         backgroundColor: _selectedOption[3]? Color(0XFF99DDC8):Color(0X4099DDC8),
+              //         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(35)),
+              //         minimumSize: Size(150,35)
+              //     )
+              // ),
             ],
           ),
          ]

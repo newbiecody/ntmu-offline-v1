@@ -15,27 +15,36 @@ class CommentSectionsState extends State<CommentSection> {
   generateComments(comments){
     List <Widget> commentSection = [];
     comments.forEach((commentObject){
-
+      commentSection.add(SizedBox(height: 15));
+      // Username
       commentSection.add(
-          Text(commentObject.comment,
+          Container(
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+            width: MediaQuery.of(context).size.width*.85,
+            alignment: Alignment.bottomRight,
+            child: Text(commentObject.commentingUser,
+                style: TextStyle(
+                    fontSize: 12
+                )
+            ),
+          )
+      );
+      // Main comment
+      var commentContent = '${commentObject.comment}';
+      commentSection.add(
+          Text(commentContent,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold
+            fontSize: 16,
+            fontWeight: FontWeight.normal
           )
           )
       );
-      commentSection.add(
-          Text(commentObject.commentingUser.fullName,
-              style: TextStyle(
-                  fontSize: 12
-              )
-          )
-      );
+
       commentSection.add(
         SizedBox(height: 16)
       );
     });
-    return commentSection;
+    return commentSection.reversed.toList();
   }
 
   @override
