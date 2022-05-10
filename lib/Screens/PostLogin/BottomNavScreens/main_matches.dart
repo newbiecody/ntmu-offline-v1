@@ -4,6 +4,7 @@ import 'package:ntmu/Components/announcements_static.dart';
 import 'package:ntmu/Components/functs.dart';
 import 'package:ntmu/Models/UserInfo.dart';
 import 'package:ntmu/api_functions/announcementsApi.dart';
+import 'package:ntmu/api_functions/apiMessageDialog.dart';
 
 import '../../../Components/chats_static_data.dart';
 import '../../../Models/UserInfo_secure.dart';
@@ -40,19 +41,28 @@ class recommendationPageState extends State<recommendationPage>{
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: <Widget>[
-                  Text("You currently do not have any matches.",
+                  Text(MatchedUsersData.requestedMatch_thisSession ? "Please try again before trying again..." : "You currently do not have any recommendations.",
                     style: TextStyle(
                       fontSize: 16),
                   ),
-                      ElevatedButton(
-                        onPressed: () async{
-                          demandMatches(context);
-                        },
-                        child: Text("Start matching?"),
-                        style: ElevatedButton.styleFrom(
-                            shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
-                            minimumSize: Size(100,35)
-                        )
+                      Visibility(
+                        maintainSize: true,
+                        maintainAnimation: true,
+                        maintainState: true,
+                        visible: MatchedUsersData.requestedMatch_thisSession,
+                        child: ElevatedButton(
+                          onPressed: () async{
+                            demandMatches(context);
+                            setState(() {
+                              MatchedUsersData.requestedMatch_thisSession = true;
+                            });
+                          },
+                          child: Text("Start matching?"),
+                          style: ElevatedButton.styleFrom(
+                              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10)),
+                              minimumSize: Size(100,35)
+                          )
+                        ),
                       )
                 ]
               )) :
@@ -151,7 +161,7 @@ class recommendationPageState extends State<recommendationPage>{
                               onPressed: () async{
                                 // Test functions here
                                 setState(() {
-                                  MatchedUsersData.list_matchedUsers.removeAt(0);
+                                  acceptRejectMatches(context, 1, widget.userData);
                                   _scrollUp();
                                 });
                               },
@@ -166,7 +176,7 @@ class recommendationPageState extends State<recommendationPage>{
                           SizedBox(width: 100),
                           ElevatedButton(
                               onPressed: (){
-                                MatchedUsersData.list_matchedUsers..removeAt(0);
+                                acceptRejectMatches(context, -1, widget.userData);
                               },
                               child: Text(
                                   'Reject'

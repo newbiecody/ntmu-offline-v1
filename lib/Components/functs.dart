@@ -11,6 +11,12 @@ import 'package:ntmu/Screens/PostLogin/SettingsDrawer/preferences.dart';
 import 'package:ntmu/Screens/PostLogin/SettingsDrawer/feedback.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Models/UserInfo_secure.dart';
+import '../Screens/PostLogin/BottomNavScreens/ForumWidgets/forum.dart';
+import '../Screens/PostLogin/BottomNavScreens/main_matches.dart';
+import '../Screens/PostLogin/BottomNavScreens/main_messages.dart';
+import '../api_functions/chatsApi.dart';
+
 
 MaterialColor CreateMaterialColor(Color color) {
   List strengths = <double>[.05];
@@ -349,4 +355,15 @@ calculateYoM(yearOfStudy){
       return now.year-yearOfStudy;
     }
   }
+}
+
+generateMainPage(UserInfoFlexi_noPassword userData){
+  retrieveChats();
+  List<Widget> _widgetOptions = [
+    recommendationPage(userData: userData),
+    forumPage(userData: userData),
+    messagesPage(userData: userData)
+  ];
+  return _widgetOptions;
+
 }

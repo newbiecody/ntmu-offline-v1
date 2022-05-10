@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:ntmu/api_functions/callLogin.dart';
 
+import '../Components/functs.dart';
 import '../Models/MatchedUser.dart';
+import '../Models/UserInfo_secure.dart';
 import '../common/GLOBAL_SETTINGS.dart';
 
 import 'package:http/http.dart' as http;
@@ -69,7 +71,26 @@ demandMatches(BuildContext context) async{
   }
 }
 
-acceptRejectMatches(BuildContext context) async{
+startChat_withNewMatch() async {
+  // Start chat if just matched
+  final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/start-chat-new-match/");
+  var token = await checkForToken();
+
+  var headers = {
+    'Authorization': 'Token $token'
+  };
+
+  if(token != null){
+    await http.post(url, headers: headers).then((value) {
+      // Do nothing
+    });
+  }
+}
+
+acceptRejectMatches(BuildContext context, choice_int, UserInfoFlexi_noPassword userdata) async{
+  // If choice_int == 1 : Accept
+  // If choice_int == -1 : Decline
+  // Same as Django server.
   final url = Uri.parse("${address_targetMachine_uri}api_ntmuMobile/accept-reject-match/");
   var token = await checkForToken();
 
@@ -77,8 +98,24 @@ acceptRejectMatches(BuildContext context) async{
     'Authorization': 'Token $token'
   };
   var data = {
-    "match_id" : "placeholder",
-    "choice" :
+    "match_id" : MatchedUsersData.list_matchedUsers[0].matchID.toString(),
+    "choice" : choice_int.toString()
   };
 
+  if(token != null){
+    await http.post(url, headers: headers, body: data).then((value) async {
+      final data = json.decode(value.body);
+      var msg = data['message'];
+      if(msg == "Success"){
+        print("Great!");
+        MatchedUsersData.list_matchedUsers.removeAt(0);
+        await startChat_withNewMatch();
+        generateMainPage(userdata);
+      }else if(msg == "Error"){
+        showApiMessageDialog(context, "Error", "There is a problem with this option now... Please try again later.");
+      }
+    });
+  }
 }
+
+// Automatically start chat thread if matched

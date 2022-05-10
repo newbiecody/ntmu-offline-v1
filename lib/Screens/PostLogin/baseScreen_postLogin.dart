@@ -36,17 +36,6 @@ class BaseScreen_postLoginState extends State<BaseScreen_postLogin>{
       _selectedIndex = index;
     });
   }
-  generateMainPage(UserInfoFlexi_noPassword userData){
-    retrieveChats();
-    List<Widget> _widgetOptions = [
-      recommendationPage(userData: userData),
-      forumPage(userData: userData),
-      messagesPage(userData: userData)
-    ];
-    return _widgetOptions;
-
-  }
-
 
   @override
   Widget build(BuildContext context){
