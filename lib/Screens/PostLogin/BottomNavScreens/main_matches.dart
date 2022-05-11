@@ -49,7 +49,7 @@ class recommendationPageState extends State<recommendationPage>{
                         maintainSize: true,
                         maintainAnimation: true,
                         maintainState: true,
-                        visible: MatchedUsersData.requestedMatch_thisSession,
+                        visible: !MatchedUsersData.requestedMatch_thisSession,
                         child: ElevatedButton(
                           onPressed: () async{
                             demandMatches(context);
